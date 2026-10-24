@@ -1,0 +1,968 @@
+COMPUTED VALUES:
+autoscaling:
+  analytics:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+  auth:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+  db:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+  functions:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+  imgproxy:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+  kong:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+  meta:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+  minio:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+  realtime:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+  rest:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+  storage:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+  studio:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+  vector:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+bigQuery:
+  enabled: false
+  projectId: google-project-id
+  projectNumber: google-project-number
+deployment:
+  analytics:
+    affinity: {}
+    annotations: {}
+    automountServiceAccountToken: true
+    enabled: false
+    envFrom: []
+    extraInitContainers: []
+    fullnameOverride: ""
+    initDb: true
+    labels: {}
+    lifecycle: {}
+    livenessProbe: {}
+    nameOverride: ""
+    nodeSelector: {}
+    podAnnotations: {}
+    priorityClassName: ""
+    readinessProbe: {}
+    replicaCount: 1
+    resources: {}
+    securityContext: {}
+    startupProbe: {}
+    terminationGracePeriodSeconds: 30
+    tolerations: []
+    volumeMounts: {}
+    volumes: {}
+  auth:
+    affinity: {}
+    annotations: {}
+    automountServiceAccountToken: true
+    dnsConfig: {}
+    dnsPolicy: ""
+    enabled: true
+    envFrom: []
+    extraInitContainers: []
+    fullnameOverride: ""
+    initDb: true
+    labels: {}
+    lifecycle: {}
+    livenessProbe: {}
+    nameOverride: ""
+    nodeSelector:
+      role: postgres
+    podAnnotations: {}
+    priorityClassName: ""
+    readinessProbe: {}
+    replicaCount: 1
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    securityContext: {}
+    startupProbe: {}
+    terminationGracePeriodSeconds: 30
+    tolerations: []
+    volumeMounts: {}
+    volumes: {}
+  db:
+    affinity: {}
+    annotations: {}
+    automountServiceAccountToken: true
+    enabled: true
+    envFrom: []
+    extraInitContainers: []
+    fullnameOverride: ""
+    initDb: true
+    labels: {}
+    lifecycle: {}
+    livenessProbe: {}
+    nameOverride: ""
+    nodeSelector:
+      role: postgres
+    podAnnotations: {}
+    priorityClassName: ""
+    readinessProbe: {}
+    replicaCount: 1
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1536Mi
+      requests:
+        cpu: 250m
+        memory: 512Mi
+    securityContext: {}
+    startupProbe: {}
+    terminationGracePeriodSeconds: 30
+    tolerations: []
+    volumeMounts: {}
+    volumes: {}
+  functions:
+    affinity: {}
+    annotations: {}
+    automountServiceAccountToken: true
+    enabled: false
+    envFrom: []
+    extraInitContainers: []
+    fullnameOverride: ""
+    labels: {}
+    lifecycle: {}
+    livenessProbe: {}
+    nameOverride: ""
+    nodeSelector: {}
+    podAnnotations: {}
+    priorityClassName: ""
+    readinessProbe: {}
+    replicaCount: 1
+    resources: {}
+    securityContext: {}
+    startupProbe: {}
+    strategy: {}
+    terminationGracePeriodSeconds: 30
+    tolerations: []
+    volumeMounts: {}
+    volumes: {}
+  imgproxy:
+    affinity: {}
+    annotations: {}
+    automountServiceAccountToken: true
+    enabled: false
+    envFrom: []
+    fullnameOverride: ""
+    labels: {}
+    lifecycle: {}
+    livenessProbe: {}
+    nameOverride: ""
+    nodeSelector: {}
+    podAnnotations: {}
+    priorityClassName: ""
+    readinessProbe: {}
+    replicaCount: 1
+    resources: {}
+    securityContext: {}
+    startupProbe: {}
+    terminationGracePeriodSeconds: 30
+    tolerations: []
+    volumeMounts: {}
+    volumes: {}
+  kong:
+    affinity: {}
+    annotations: {}
+    automountServiceAccountToken: true
+    configMapRef: ""
+    enabled: false
+    envFrom: []
+    fullnameOverride: ""
+    labels: {}
+    lifecycle: {}
+    livenessProbe: {}
+    nameOverride: ""
+    nodeSelector: {}
+    podAnnotations: {}
+    priorityClassName: ""
+    readinessProbe: {}
+    replicaCount: 1
+    resources: {}
+    securityContext: {}
+    startupProbe: {}
+    terminationGracePeriodSeconds: 30
+    tolerations: []
+    volumeMounts: {}
+    volumes: {}
+  meta:
+    affinity: {}
+    annotations: {}
+    automountServiceAccountToken: true
+    enabled: false
+    envFrom: []
+    fullnameOverride: ""
+    labels: {}
+    lifecycle: {}
+    livenessProbe: {}
+    nameOverride: ""
+    nodeSelector: {}
+    podAnnotations: {}
+    priorityClassName: ""
+    readinessProbe: {}
+    replicaCount: 1
+    resources: {}
+    securityContext: {}
+    startupProbe: {}
+    terminationGracePeriodSeconds: 30
+    tolerations: []
+    volumeMounts: {}
+    volumes: {}
+  minio:
+    affinity: {}
+    annotations: {}
+    automountServiceAccountToken: true
+    enabled: false
+    envFrom: []
+    fullnameOverride: ""
+    labels: {}
+    lifecycle: {}
+    livenessProbe: {}
+    nameOverride: ""
+    nodeSelector: {}
+    podAnnotations: {}
+    priorityClassName: ""
+    readinessProbe: {}
+    replicaCount: 1
+    resources: {}
+    securityContext: {}
+    startupProbe: {}
+    terminationGracePeriodSeconds: 30
+    tolerations: []
+    volumeMounts: {}
+    volumes: {}
+  realtime:
+    affinity: {}
+    annotations: {}
+    args: []
+    automountServiceAccountToken: true
+    command: []
+    dnsConfig: {}
+    dnsPolicy: ""
+    enabled: false
+    envFrom: []
+    extraInitContainers: []
+    fullnameOverride: ""
+    initDb: true
+    labels: {}
+    lifecycle: {}
+    livenessProbe: {}
+    nameOverride: ""
+    nodeSelector: {}
+    podAnnotations: {}
+    priorityClassName: ""
+    readinessProbe: {}
+    replicaCount: 1
+    resources: {}
+    securityContext: {}
+    startupProbe: {}
+    terminationGracePeriodSeconds: 30
+    tolerations: []
+    volumeMounts: {}
+    volumes: {}
+  rest:
+    affinity: {}
+    annotations: {}
+    automountServiceAccountToken: true
+    enabled: false
+    envFrom: []
+    extraInitContainers: []
+    fullnameOverride: ""
+    initDb: true
+    labels: {}
+    lifecycle: {}
+    livenessProbe: {}
+    nameOverride: ""
+    nodeSelector: {}
+    podAnnotations: {}
+    priorityClassName: ""
+    readinessProbe: {}
+    replicaCount: 1
+    resources: {}
+    securityContext: {}
+    startupProbe: {}
+    terminationGracePeriodSeconds: 30
+    tolerations: []
+    volumeMounts: {}
+    volumes: {}
+  storage:
+    affinity: {}
+    annotations: {}
+    automountServiceAccountToken: true
+    enabled: false
+    envFrom: []
+    extraInitContainers: []
+    fullnameOverride: ""
+    initDb: true
+    labels: {}
+    lifecycle: {}
+    livenessProbe: {}
+    nameOverride: ""
+    nodeSelector: {}
+    podAnnotations: {}
+    priorityClassName: ""
+    readinessProbe: {}
+    replicaCount: 1
+    resources: {}
+    securityContext: {}
+    startupProbe: {}
+    terminationGracePeriodSeconds: 30
+    tolerations: []
+    volumeMounts: {}
+    volumes: {}
+  studio:
+    affinity: {}
+    annotations: {}
+    automountServiceAccountToken: true
+    enabled: false
+    envFrom: []
+    fullnameOverride: ""
+    labels: {}
+    lifecycle: {}
+    livenessProbe: {}
+    nameOverride: ""
+    nodeSelector: {}
+    podAnnotations: {}
+    priorityClassName: ""
+    readinessProbe: {}
+    replicaCount: 1
+    resources: {}
+    securityContext: {}
+    startupProbe: {}
+    strategy: {}
+    terminationGracePeriodSeconds: 30
+    tolerations: []
+    volumeMounts: {}
+    volumes: {}
+  vector:
+    affinity: {}
+    annotations: {}
+    automountServiceAccountToken: true
+    enabled: false
+    envFrom: []
+    fullnameOverride: ""
+    labels: {}
+    lifecycle: {}
+    livenessProbe: {}
+    nameOverride: ""
+    nodeSelector: {}
+    podAnnotations: {}
+    priorityClassName: ""
+    readinessProbe: {}
+    replicaCount: 1
+    resources: {}
+    securityContext: {}
+    startupProbe: {}
+    terminationGracePeriodSeconds: 30
+    tolerations: []
+    volumeMounts: {}
+    volumes: {}
+environment:
+  analytics:
+  - name: LOGFLARE_NODE_HOST
+    value: 127.0.0.1
+  - name: DB_SCHEMA
+    value: _analytics
+  - name: POSTGRES_BACKEND_SCHEMA
+    value: _analytics
+  - name: LOGFLARE_SINGLE_TENANT
+    value: "true"
+  - name: LOGFLARE_SUPABASE_MODE
+    value: "true"
+  - name: LOGFLARE_FEATURE_FLAG_OVERRIDE
+    value: multibackend=true
+  auth:
+  - name: API_EXTERNAL_URL
+    value: http://supabase.local
+  - name: GOTRUE_API_HOST
+    value: 0.0.0.0
+  - name: GOTRUE_API_PORT
+    value: "9999"
+  - name: GOTRUE_SITE_URL
+    value: http://supabase.local
+  - name: GOTRUE_URI_ALLOW_LIST
+    value: '*'
+  - name: GOTRUE_DISABLE_SIGNUP
+    value: "false"
+  - name: GOTRUE_JWT_DEFAULT_GROUP_NAME
+    value: authenticated
+  - name: GOTRUE_JWT_ADMIN_ROLES
+    value: service_role
+  - name: GOTRUE_JWT_AUD
+    value: authenticated
+  - name: GOTRUE_JWT_EXP
+    value: "3600"
+  - name: GOTRUE_EXTERNAL_EMAIL_ENABLED
+    value: "true"
+  - name: GOTRUE_MAILER_AUTOCONFIRM
+    value: "true"
+  - name: GOTRUE_EXTERNAL_ANONYMOUS_USERS_ENABLED
+    value: "false"
+  - name: GOTRUE_SMTP_ADMIN_EMAIL
+    value: SMTP_ADMIN_MAIL
+  - name: GOTRUE_SMTP_HOST
+    value: SMTP_HOST
+  - name: GOTRUE_SMTP_PORT
+    value: "123"
+  - name: GOTRUE_EXTERNAL_PHONE_ENABLED
+    value: "false"
+  - name: GOTRUE_SMS_AUTOCONFIRM
+    value: "false"
+  - name: GOTRUE_SMTP_SENDER_NAME
+    value: SMTP_SENDER_NAME
+  - name: GOTRUE_MAILER_URLPATHS_INVITE
+    value: /auth/v1/verify
+  - name: GOTRUE_MAILER_URLPATHS_CONFIRMATION
+    value: /auth/v1/verify
+  - name: GOTRUE_MAILER_URLPATHS_RECOVERY
+    value: /auth/v1/verify
+  - name: GOTRUE_MAILER_URLPATHS_EMAIL_CHANGE
+    value: /auth/v1/verify
+  db:
+  - name: POSTGRES_HOST
+    value: /var/run/postgresql
+  - name: PGPORT
+    value: "5432"
+  - name: POSTGRES_PORT
+    value: "5432"
+  - name: JWT_EXP
+    value: 3600
+  functions:
+  - name: VERIFY_JWT
+    value: false
+  imgproxy:
+  - name: IMGPROXY_BIND
+    value: :5001
+  - name: IMGPROXY_LOCAL_FILESYSTEM_ROOT
+    value: /
+  - name: IMGPROXY_USE_ETAG
+    value: "true"
+  - name: IMGPROXY_ENABLE_WEBP_DETECTION
+    value: "true"
+  kong:
+  - name: KONG_DATABASE
+    value: "off"
+  - name: KONG_DECLARATIVE_CONFIG
+    value: /usr/local/kong/kong.yml
+  - name: KONG_DNS_ORDER
+    value: LAST,A,CNAME
+  - name: KONG_PLUGINS
+    value: request-transformer,cors,key-auth,acl,basic-auth,post-function
+  - name: KONG_NGINX_PROXY_PROXY_BUFFER_SIZE
+    value: 160k
+  - name: KONG_NGINX_PROXY_PROXY_BUFFERS
+    value: 64 160k
+  - name: KONG_LOG_LEVEL
+    value: warn
+  - name: KONG_NGINX_WORKER_PROCESSES
+    value: "2"
+  meta:
+  - name: DB_DRIVER
+    value: postgres
+  - name: PG_META_PORT
+    value: "8080"
+  minio: []
+  realtime:
+  - name: DB_USER
+    value: supabase_admin
+  - name: DB_SSL
+    value: false
+  - name: PORT
+    value: "4000"
+  - name: FLY_ALLOC_ID
+    value: fly123
+  - name: FLY_APP_NAME
+    value: realtime
+  - name: ENABLE_TAILSCALE
+    value: "false"
+  - name: DB_AFTER_CONNECT_QUERY
+    value: SET search_path TO _realtime
+  - name: ERL_AFLAGS
+    value: -proto_dist inet_tcp
+  - name: DNS_NODES
+    value: ''''''
+  - name: RLIMIT_NOFILE
+    value: "10000"
+  - name: APP_NAME
+    value: realtime
+  - name: SEED_SELF_HOST
+    value: true
+  - name: RUN_JANITOR
+    value: true
+  rest:
+  - name: PGRST_DB_SCHEMAS
+    value: public,storage,graphql_public
+  - name: PGRST_DB_ANON_ROLE
+    value: anon
+  - name: PGRST_DB_USE_LEGACY_GUCS
+    value: false
+  - name: PGRST_APP_SETTINGS_JWT_EXP
+    value: 3600
+  storage:
+  - name: REQUEST_ALLOW_X_FORWARDED_PATH
+    value: "true"
+  - name: FILE_SIZE_LIMIT
+    value: "52428800"
+  - name: FILE_STORAGE_BACKEND_PATH
+    value: /var/lib/storage
+  - name: TENANT_ID
+    value: stub
+  - name: REGION
+    value: stub
+  - name: GLOBAL_S3_BUCKET
+    value: stub
+  - name: ENABLE_IMAGE_TRANSFORMATION
+    value: "true"
+  studio:
+  - name: HOSTNAME
+    value: '::'
+  - name: STUDIO_PORT
+    value: "3000"
+  - name: DEFAULT_ORGANIZATION_NAME
+    value: Default Organization
+  - name: DEFAULT_PROJECT_NAME
+    value: Default Project
+  - name: SUPABASE_PUBLIC_URL
+    value: http://supabase.local
+  - name: NEXT_ANALYTICS_BACKEND_PROVIDER
+    value: postgres
+  vector: []
+image:
+  analytics:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    repository: supabase/logflare
+    tag: 1.43.1
+  auth:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    repository: supabase/gotrue
+    tag: v2.189.0
+  db:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    repository: supabase/postgres
+    tag: 17.6.1.136
+  functions:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    repository: supabase/edge-runtime
+    tag: v1.74.0
+  imgproxy:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    repository: darthsim/imgproxy
+    tag: v3.30.1
+  initDb:
+    pullPolicy: IfNotPresent
+    repository: postgres
+    tag: 17-alpine
+  kong:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    repository: kong/kong
+    tag: 3.9.1
+  meta:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    repository: supabase/postgres-meta
+    tag: v0.96.6
+  minio:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    repository: cgr.dev/chainguard/minio
+    tag: latest
+  minioClient:
+    pullPolicy: IfNotPresent
+    repository: cgr.dev/chainguard/minio-client
+    tag: latest-dev
+  realtime:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    repository: supabase/realtime
+    tag: v2.102.3
+  rest:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    repository: postgrest/postgrest
+    tag: v14.12
+  storage:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    repository: supabase/storage-api
+    tag: v1.60.4
+  studio:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    repository: supabase/studio
+    tag: 2026.08.03-sha-022b374
+  vector:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    repository: timberio/vector
+    tag: 0.53.0-alpine
+ingress:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  className: nginx
+  enabled: true
+  hosts:
+  - host: supabase.local
+    paths:
+    - path: /
+      pathType: Prefix
+  tls: []
+networkPolicy:
+  db:
+    enabled: false
+persistence:
+  db:
+    accessModes:
+    - ReadWriteOnce
+    annotations: {}
+    enabled: true
+    size: 10Gi
+    storageClassName: local-path
+  deno:
+    accessModes:
+    - ReadWriteOnce
+    annotations: {}
+    enabled: false
+    size: 1Gi
+    storageClassName: ""
+  functions:
+    accessModes:
+    - ReadWriteOnce
+    annotations: {}
+    enabled: false
+    size: 1Gi
+    storageClassName: ""
+  imgproxy:
+    accessModes:
+    - ReadWriteOnce
+    annotations: {}
+    enabled: false
+    size: 1Gi
+    storageClassName: ""
+  minio:
+    accessModes:
+    - ReadWriteOnce
+    annotations: {}
+    enabled: false
+    size: 1Gi
+    storageClassName: ""
+  pgsodium:
+    accessModes:
+    - ReadWriteOnce
+    annotations: {}
+    enabled: true
+    size: 100Mi
+    storageClassName: local-path
+  snippets:
+    accessModes:
+    - ReadWriteOnce
+    annotations: {}
+    enabled: false
+    size: 1Gi
+    storageClassName: ""
+  storage:
+    accessModes:
+    - ReadWriteOnce
+    annotations: {}
+    enabled: false
+    size: 1Gi
+    storageClassName: ""
+secret:
+  analytics:
+    privateAccessToken: your-super-secret-and-long-logflare-key-private
+    publicAccessToken: your-super-secret-and-long-logflare-key-public
+  apikey:
+    anonKeyAsymmetric: ""
+    jwtJwks: ""
+    jwtKeys: ""
+    publishableKey: ""
+    secretKey: ""
+    serviceRoleKeyAsymmetric: ""
+  bigquery:
+    gcloudJson: ""
+  dashboard:
+    openAiApiKey: key_super_secret
+    password: this_password_is_insecure_and_should_be_updated
+    username: supabase
+  db:
+    database: postgres
+    host: ""
+    password: your-super-secret-and-long-postgres-password
+    port: ""
+    secretRef: supabase-core
+    secretRefKey:
+      password: dbPassword
+  jwt:
+    anonKey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE
+    secret: your-super-secret-jwt-token-with-at-least-32-characters-long
+    secretRef: supabase-core
+    secretRefKey:
+      anonKey: anonKey
+      secret: jwtSecret
+      serviceKey: serviceKey
+    serviceKey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJzZXJ2aWNlX3JvbGUiLAogICAgImlzcyI6ICJzdXBhYmFzZS1kZW1vIiwKICAgICJpYXQiOiAxNjQxNzY5MjAwLAogICAgImV4cCI6IDE3OTk1MzU2MDAKfQ.DaYlNEoUrrEn2Ig7tqibS-PHK5vgusbcbo7X36XVt4Q
+  meta:
+    cryptoKey: your-encryption-key-32-chars-min
+  minio:
+    password: secret1234
+    user: supa-storage
+  realtime:
+    dbEncKey: supabaserealtime
+    secretKeyBase: UpNVntn3cDxHJpq99YMc1T1AQgQpc8kfYTuRgBiYa15BLrx8etQoXz3gZv1/u2oq
+  s3:
+    accessKey: 850181e4652dd023b7a98c58ae0d2d34bd487ee0cc3254aed6eda37307425907
+    keyId: 625729a08b95bf1b7ff351a663f3a23c
+  smtp:
+    password: fake_mail_password
+    username: fake_mail_user
+service:
+  analytics:
+    annotations: {}
+    labels: {}
+    port: 4000
+    portName: http
+    protocol: TCP
+    targetPort: 4000
+    type: ClusterIP
+  auth:
+    annotations: {}
+    labels: {}
+    port: 9999
+    portName: http
+    protocol: TCP
+    targetPort: 9999
+    type: ClusterIP
+  db:
+    annotations: {}
+    labels: {}
+    port: 5432
+    portName: http
+    protocol: TCP
+    targetPort: 5432
+    type: ClusterIP
+  functions:
+    annotations: {}
+    labels: {}
+    port: 9000
+    portName: http
+    protocol: TCP
+    targetPort: 9000
+    type: ClusterIP
+  imgproxy:
+    annotations: {}
+    labels: {}
+    port: 5001
+    portName: http
+    protocol: TCP
+    targetPort: 5001
+    type: ClusterIP
+  kong:
+    annotations: {}
+    labels: {}
+    port: 8000
+    portName: http
+    protocol: TCP
+    targetPort: 8000
+    type: ClusterIP
+  meta:
+    annotations: {}
+    labels: {}
+    port: 8080
+    portName: http
+    protocol: TCP
+    targetPort: 8080
+    type: ClusterIP
+  minio:
+    annotations: {}
+    labels: {}
+    port: 9000
+    portName: http
+    protocol: TCP
+    targetPort: 9000
+    type: ClusterIP
+  realtime:
+    annotations: {}
+    labels: {}
+    port: 4000
+    portName: http
+    protocol: TCP
+    targetPort: 4000
+    type: ClusterIP
+  rest:
+    annotations: {}
+    labels: {}
+    port: 3000
+    portName: http
+    protocol: TCP
+    targetPort: 3000
+    type: ClusterIP
+  storage:
+    annotations: {}
+    labels: {}
+    port: 5000
+    portName: http
+    protocol: TCP
+    targetPort: 5000
+    type: ClusterIP
+  studio:
+    annotations: {}
+    labels: {}
+    port: 3000
+    portName: http
+    protocol: TCP
+    targetPort: 3000
+    type: ClusterIP
+  vector:
+    annotations: {}
+    labels: {}
+    port: 9001
+    portName: http
+    protocol: TCP
+    targetPort: 9001
+    type: ClusterIP
+serviceAccount:
+  analytics:
+    annotations: {}
+    create: true
+    name: ""
+  auth:
+    annotations: {}
+    create: true
+    name: ""
+  db:
+    annotations: {}
+    create: true
+    name: ""
+  functions:
+    annotations: {}
+    create: true
+    name: ""
+  imgproxy:
+    annotations: {}
+    create: true
+    name: ""
+  kong:
+    annotations: {}
+    create: true
+    name: ""
+  meta:
+    annotations: {}
+    create: true
+    name: ""
+  minio:
+    annotations: {}
+    create: true
+    name: ""
+  realtime:
+    annotations: {}
+    create: true
+    name: ""
+  rest:
+    annotations: {}
+    create: true
+    name: ""
+  storage:
+    annotations: {}
+    create: true
+    name: ""
+  studio:
+    annotations: {}
+    create: true
+    name: ""
+  vector:
+    annotations: {}
+    create: true
+    name: ""
+serviceMonitor:
+  annotations: {}
+  components:
+    analytics:
+      enabled: false
+    auth:
+      enabled: false
+    db:
+      enabled: false
+    functions:
+      enabled: false
+    imgproxy:
+      enabled: false
+    kong:
+      enabled: false
+    meta:
+      enabled: false
+    minio:
+      enabled: false
+    realtime:
+      enabled: false
+    rest:
+      enabled: false
+    storage:
+      enabled: false
+    studio:
+      enabled: false
+    vector:
+      enabled: false
+  enabled: false
+  interval: 30s
+  labels: {}
+  metricRelabelings: []
+  namespace: ""
+  path: /metrics
+  port: http
+  relabelings: []
+  scheme: http
+  scrapeTimeout: 10s
+  tlsConfig: {}

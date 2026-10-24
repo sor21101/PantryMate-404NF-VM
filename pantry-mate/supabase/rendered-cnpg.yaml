@@ -1,0 +1,2394 @@
+---
+# Source: supabase/templates/auth/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: supabase-dev-supabase-auth
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+
+---
+# Source: supabase/templates/functions/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: supabase-dev-supabase-functions
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+
+---
+# Source: supabase/templates/imgproxy/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: supabase-dev-supabase-imgproxy
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+
+---
+# Source: supabase/templates/kong/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: supabase-dev-supabase-kong
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+
+---
+# Source: supabase/templates/meta/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: supabase-dev-supabase-meta
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+
+---
+# Source: supabase/templates/realtime/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: supabase-dev-supabase-realtime
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+
+---
+# Source: supabase/templates/rest/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: supabase-dev-supabase-rest
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+
+---
+# Source: supabase/templates/storage/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: supabase-dev-supabase-storage
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+
+---
+# Source: supabase/templates/studio/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: supabase-dev-supabase-studio
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+
+---
+# Source: supabase/templates/secret/analytics.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: supabase-dev-analytics
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+type: Opaque
+data:
+  publicAccessToken: "eW91ci1zdXBlci1zZWNyZXQtYW5kLWxvbmctbG9nZmxhcmUta2V5LXB1YmxpYw=="
+  privateAccessToken: "eW91ci1zdXBlci1zZWNyZXQtYW5kLWxvbmctbG9nZmxhcmUta2V5LXByaXZhdGU="
+
+---
+# Source: supabase/templates/secret/apikey.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: supabase-dev-apikey
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+type: Opaque
+data:
+  publishableKey: ""
+  secretKey: ""
+  anonKeyAsymmetric: ""
+  serviceRoleKeyAsymmetric: ""
+  jwtKeys: ""
+  jwtJwks: ""
+
+---
+# Source: supabase/templates/secret/dashboard.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: supabase-dev-dashboard
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+type: Opaque
+data:
+  username: "c3VwYWJhc2U="
+  password: "dGhpc19wYXNzd29yZF9pc19pbnNlY3VyZV9hbmRfc2hvdWxkX2JlX3VwZGF0ZWQ="
+  openAiApiKey: "a2V5X3N1cGVyX3NlY3JldA=="
+
+---
+# Source: supabase/templates/secret/meta.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: supabase-dev-meta
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+type: Opaque
+data:
+  cryptoKey: "eW91ci1lbmNyeXB0aW9uLWtleS0zMi1jaGFycy1taW4="
+
+---
+# Source: supabase/templates/secret/minio.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: supabase-dev-minio
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+type: Opaque
+data:
+  user: "c3VwYS1zdG9yYWdl"
+  password: "c2VjcmV0MTIzNA=="
+
+---
+# Source: supabase/templates/secret/realtime.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: supabase-dev-realtime
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+type: Opaque
+data:
+  secretKeyBase: "VXBOVm50bjNjRHhISnBxOTlZTWMxVDFBUWdRcGM4a2ZZVHVSZ0JpWWExNUJMcng4ZXRRb1h6M2dadjEvdTJvcQ=="
+  dbEncKey: "c3VwYWJhc2VyZWFsdGltZQ=="
+
+---
+# Source: supabase/templates/secret/s3.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: supabase-dev-s3
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+type: Opaque
+data:
+  keyId: "NjI1NzI5YTA4Yjk1YmYxYjdmZjM1MWE2NjNmM2EyM2M="
+  accessKey: "ODUwMTgxZTQ2NTJkZDAyM2I3YTk4YzU4YWUwZDJkMzRiZDQ4N2VlMGNjMzI1NGFlZDZlZGEzNzMwNzQyNTkwNw=="
+
+---
+# Source: supabase/templates/secret/smtp.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: supabase-dev-smtp
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+type: Opaque
+data:
+  username: "ZmFrZV9tYWlsX3VzZXI="
+  password: "ZmFrZV9tYWlsX3Bhc3N3b3Jk"
+
+---
+# Source: supabase/templates/functions/functions.config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: supabase-dev-supabase-functions-main
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+data:
+  index.ts: |
+    import * as jose from 'https://deno.land/x/jose@v4.14.4/index.ts'
+    
+    console.log('main function started')
+    
+    const JWT_SECRET = Deno.env.get('JWT_SECRET')
+    const VERIFY_JWT = Deno.env.get('VERIFY_JWT') === 'true'
+    
+    function getAuthToken(req: Request) {
+    const authHeader = req.headers.get('authorization')
+    if (!authHeader) {
+        throw new Error('Missing authorization header')
+    }
+    const [bearer, token] = authHeader.split(' ')
+    if (bearer !== 'Bearer') {
+        throw new Error(`Auth header is not 'Bearer {token}'`)
+    }
+    return token
+    }
+    
+    async function verifyJWT(jwt: string): Promise<boolean> {
+    const encoder = new TextEncoder()
+    const secretKey = encoder.encode(JWT_SECRET)
+    try {
+        await jose.jwtVerify(jwt, secretKey)
+    } catch (err) {
+        console.error(err)
+        return false
+    }
+    return true
+    }
+    
+    Deno.serve(async (req: Request) => {
+    if (req.method !== 'OPTIONS' && VERIFY_JWT) {
+        try {
+        const token = getAuthToken(req)
+        const isValidJWT = await verifyJWT(token)
+    
+        if (!isValidJWT) {
+            return new Response(JSON.stringify({ msg: 'Invalid JWT' }), {
+            status: 401,
+            headers: { 'Content-Type': 'application/json' },
+            })
+        }
+        } catch (e) {
+        console.error(e)
+        return new Response(JSON.stringify({ msg: e.toString() }), {
+            status: 401,
+            headers: { 'Content-Type': 'application/json' },
+        })
+        }
+    }
+    
+    const url = new URL(req.url)
+    const { pathname } = url
+    const path_parts = pathname.split('/')
+    const service_name = path_parts[1]
+    
+    if (!service_name || service_name === '') {
+        const error = { msg: 'missing function name in request' }
+        return new Response(JSON.stringify(error), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+        })
+    }
+    
+    const servicePath = `/home/deno/functions/${service_name}`
+    console.error(`serving the request with ${servicePath}`)
+    
+    const memoryLimitMb = 150
+    const workerTimeoutMs = 1 * 60 * 1000
+    const noModuleCache = false
+    const importMapPath = null
+    const envVarsObj = Deno.env.toObject()
+    const envVars = Object.keys(envVarsObj).map((k) => [k, envVarsObj[k]])
+    
+    try {
+        const worker = await EdgeRuntime.userWorkers.create({
+        servicePath,
+        memoryLimitMb,
+        workerTimeoutMs,
+        noModuleCache,
+        importMapPath,
+        envVars,
+        })
+        return await worker.fetch(req)
+    } catch (e) {
+        const error = { msg: e.toString() }
+        return new Response(JSON.stringify(error), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+        })
+    }
+    })
+    
+
+---
+# Source: supabase/templates/kong/config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: supabase-dev-supabase-kong
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+data:
+  kong-entrypoint.sh: |
+    #!/bin/bash
+    
+    set -euo pipefail
+    
+    if [ -n "${SUPABASE_SECRET_KEY:-}" ] && [ -n "${SUPABASE_PUBLISHABLE_KEY:-}" ]; then
+      export LUA_AUTH_EXPR="\$((headers.authorization ~= nil and headers.authorization:sub(1, 10) ~= 'Bearer sb_' and headers.authorization) or (headers.apikey == '${SUPABASE_SECRET_KEY}' and 'Bearer ${SERVICE_ROLE_KEY_ASYMMETRIC}') or (headers.apikey == '${SUPABASE_PUBLISHABLE_KEY}' and 'Bearer ${ANON_KEY_ASYMMETRIC}') or headers.apikey)"
+      export LUA_RT_WS_EXPR="\$((query_params.apikey == '${SUPABASE_SECRET_KEY}' and '${SERVICE_ROLE_KEY_ASYMMETRIC}') or (query_params.apikey == '${SUPABASE_PUBLISHABLE_KEY}' and '${ANON_KEY_ASYMMETRIC}') or query_params.apikey)"
+    else
+      export LUA_AUTH_EXPR="\$((headers.authorization ~= nil and headers.authorization:sub(1, 10) ~= 'Bearer sb_' and headers.authorization) or headers.apikey)"
+      export LUA_RT_WS_EXPR="\$(query_params.apikey)"
+    fi
+    
+    echo "Replacing env placeholders of /usr/local/kong/kong.yml"
+    
+    sed \
+    -e "s|\${SUPABASE_ANON_KEY}|${SUPABASE_ANON_KEY}|" \
+    -e "s|\${SUPABASE_SERVICE_KEY}|${SUPABASE_SERVICE_KEY}|" \
+    -e "s|\${SUPABASE_PUBLISHABLE_KEY}|${SUPABASE_PUBLISHABLE_KEY:-}|" \
+    -e "s|\${SUPABASE_SECRET_KEY}|${SUPABASE_SECRET_KEY:-}|" \
+    -e "s|\${ANON_KEY_ASYMMETRIC}|${ANON_KEY_ASYMMETRIC:-}|" \
+    -e "s|\${SERVICE_ROLE_KEY_ASYMMETRIC}|${SERVICE_ROLE_KEY_ASYMMETRIC:-}|" \
+    -e "s|\${LUA_AUTH_EXPR}|${LUA_AUTH_EXPR}|" \
+    -e "s|\${LUA_RT_WS_EXPR}|${LUA_RT_WS_EXPR}|" \
+    -e "s|\${DASHBOARD_USERNAME}|${DASHBOARD_USERNAME}|" \
+    -e "s|\${DASHBOARD_PASSWORD}|${DASHBOARD_PASSWORD}|" \
+    /usr/local/kong/template.yml \
+    > /usr/local/kong/kong.yml
+    
+    sed -i '/^[[:space:]]*- key:[[:space:]]*$/d' /usr/local/kong/kong.yml
+    
+    exec /entrypoint.sh kong docker-start
+    
+  kong.yml: |
+    _format_version: '2.1'
+    _transform: true
+    
+    consumers:
+      - username: DASHBOARD
+      - username: anon
+        keyauth_credentials:
+            - key: ${SUPABASE_ANON_KEY}
+            - key: ${SUPABASE_PUBLISHABLE_KEY}
+      - username: service_role
+        keyauth_credentials:
+            - key: ${SUPABASE_SERVICE_KEY}
+            - key: ${SUPABASE_SECRET_KEY}
+    acls:
+      - consumer: anon
+        group: anon
+      - consumer: service_role
+        group: admin
+    basicauth_credentials:
+      - consumer: DASHBOARD
+        username: '${DASHBOARD_USERNAME}'
+        password: '${DASHBOARD_PASSWORD}'
+    services:
+      - name: auth-v1-open
+        url: http://supabase-dev-supabase-auth:9999/verify
+        routes:
+          - name: auth-v1-open
+            strip_path: true
+            paths:
+              - /auth/v1/verify
+        plugins:
+          - name: cors
+      - name: auth-v1-open-callback
+        url: http://supabase-dev-supabase-auth:9999/callback
+        routes:
+          - name: auth-v1-open-callback
+            strip_path: true
+            paths:
+              - /auth/v1/callback
+        plugins:
+          - name: cors
+      - name: auth-v1-open-authorize
+        url: http://supabase-dev-supabase-auth:9999/authorize
+        routes:
+          - name: auth-v1-open-authorize
+            strip_path: true
+            paths:
+              - /auth/v1/authorize
+        plugins:
+          - name: cors
+      - name: auth-v1-open-jwks
+        url: http://supabase-dev-supabase-auth:9999/.well-known/jwks.json
+        routes:
+          - name: auth-v1-open-jwks
+            strip_path: true
+            paths:
+              - /auth/v1/.well-known/jwks.json
+        plugins:
+          - name: cors
+      - name: well-known-oauth
+        _comment: 'Auth: /.well-known/oauth-authorization-server -> http://supabase-dev-supabase-auth:9999/.well-known/oauth-authorization-server'
+        url: http://supabase-dev-supabase-auth:9999/.well-known/oauth-authorization-server
+        routes:
+          - name: well-known-oauth
+            strip_path: true
+            paths:
+              - /.well-known/oauth-authorization-server
+        plugins:
+          - name: cors
+          
+      - name: auth-v1-open-sso-acs
+        url: "http://auth:9999/sso/saml/acs"
+        routes:
+          - name: auth-v1-open-sso-acs
+            strip_path: true
+            paths:
+            - /sso/saml/acs
+        plugins:
+          - name: cors
+      - name: auth-v1-open-sso-metadata
+        url: "http://auth:9999/sso/saml/metadata"
+        routes:
+          - name: auth-v1-open-sso-metadata
+            strip_path: true
+            paths:
+            - /sso/saml/metadata
+        plugins:
+          - name: cors
+      - name: auth-v1
+        _comment: "GoTrue: /auth/v1/* -> http://supabase-dev-supabase-auth:9999/*"
+        url: http://supabase-dev-supabase-auth:9999
+        routes:
+          - name: auth-v1-all
+            strip_path: true
+            paths:
+              - /auth/v1/
+        plugins:
+          - name: cors
+          - name: key-auth
+            config:
+              hide_credentials: false
+          - name: request-transformer
+            config:
+              add:
+                headers:
+                  - "Authorization: ${LUA_AUTH_EXPR}"
+              replace:
+                headers:
+                  - "Authorization: ${LUA_AUTH_EXPR}"
+          - name: acl
+            config:
+              hide_groups_header: true
+              allow:
+                - admin
+                - anon
+      - name: rest-v1
+        _comment: "PostgREST: /rest/v1/* -> http://supabase-dev-supabase-rest:3000/*"
+        url: http://supabase-dev-supabase-rest:3000/
+        routes:
+          - name: rest-v1-all
+            strip_path: true
+            paths:
+              - /rest/v1/
+        plugins:
+          - name: cors
+          - name: key-auth
+            config:
+              hide_credentials: false
+          - name: request-transformer
+            config:
+              add:
+                headers:
+                  - "Authorization: ${LUA_AUTH_EXPR}"
+              replace:
+                headers:
+                  - "Authorization: ${LUA_AUTH_EXPR}"
+          - name: acl
+            config:
+              hide_groups_header: true
+              allow:
+                - admin
+                - anon
+      - name: graphql-v1
+        _comment: 'PostgREST: /graphql/v1/* -> http://supabase-dev-supabase-rest:3000/rpc/graphql'
+        url: http://supabase-dev-supabase-rest:3000/rpc/graphql
+        routes:
+          - name: graphql-v1-all
+            strip_path: true
+            paths:
+              - /graphql/v1
+        plugins:
+          - name: cors
+          - name: key-auth
+            config:
+              hide_credentials: false
+          - name: request-transformer
+            config:
+              add:
+                headers:
+                  - "Content-Profile: graphql_public"
+                  - "Authorization: ${LUA_AUTH_EXPR}"
+              replace:
+                headers:
+                  - "Authorization: ${LUA_AUTH_EXPR}"
+          - name: acl
+            config:
+              hide_groups_header: true
+              allow:
+                - admin
+                - anon
+      - name: realtime-v1-ws
+        _comment: "Realtime: /realtime/v1/* -> ws://supabase-dev-supabase-realtime:4000/socket/*"
+        url: http://supabase-dev-supabase-realtime:4000/socket
+        protocol: ws
+        routes:
+          - name: realtime-v1-ws
+            strip_path: true
+            paths:
+              - /realtime/v1/
+        plugins:
+          - name: cors
+          - name: key-auth
+            config:
+              hide_credentials: false
+          - name: request-transformer
+            config:
+              add:
+                headers:
+                  - "x-api-key:${LUA_RT_WS_EXPR}"
+              replace:
+                querystring:
+                  - "apikey:${LUA_RT_WS_EXPR}"
+          - name: acl
+            config:
+              hide_groups_header: true
+              allow:
+                - admin
+                - anon
+      - name: realtime-v1-rest
+        _comment: 'Realtime: /realtime/v1/* -> http://supabase-dev-supabase-realtime:4000/api/*'
+        url: http://supabase-dev-supabase-realtime:4000/api
+        protocol: http
+        routes:
+          - name: realtime-v1-rest
+            strip_path: true
+            paths:
+              - /realtime/v1/api
+        plugins:
+          - name: cors
+          - name: key-auth
+            config:
+              hide_credentials: false
+          - name: request-transformer
+            config:
+              add:
+                headers:
+                  - "Authorization: ${LUA_AUTH_EXPR}"
+              replace:
+                headers:
+                  - "Authorization: ${LUA_AUTH_EXPR}"
+          - name: acl
+            config:
+              hide_groups_header: true
+              allow:
+                - admin
+                - anon
+      - name: storage-v1
+        _comment: "Storage: /storage/v1/* -> http://supabase-dev-supabase-storage:5000/*"
+        url: http://supabase-dev-supabase-storage:5000/
+        routes:
+          - name: storage-v1-all
+            strip_path: true
+            paths:
+              - /storage/v1/
+        plugins:
+          - name: cors
+          - name: request-transformer
+            config:
+              add:
+                headers:
+                  - "Authorization: ${LUA_AUTH_EXPR}"
+              replace:
+                headers:
+                  - "Authorization: ${LUA_AUTH_EXPR}"
+          - name: post-function
+            config:
+              access:
+                - |
+                  local auth = kong.request.get_header("authorization")
+                  if auth == nil or auth == "" or auth:find("^%s*$") then
+                    kong.service.request.clear_header("authorization")
+                  end
+      - name: functions-v1
+        _comment: 'Edge Functions: /functions/v1/* -> http://supabase-dev-supabase-functions:9000/*'
+        url: http://supabase-dev-supabase-functions:9000/
+        read_timeout: 150000
+        routes:
+          - name: functions-v1-all
+            strip_path: true
+            paths:
+              - /functions/v1/
+        plugins:
+          - name: cors
+    
+    
+    
+    
+      - name: meta
+        _comment: "pg-meta: /pg/* -> http://supabase-dev-supabase-meta:8080/*"
+        url: http://supabase-dev-supabase-meta:8080/
+        routes:
+          - name: meta-all
+            strip_path: true
+            paths:
+              - /pg/
+        plugins:
+          - name: key-auth
+            config:
+              hide_credentials: false
+          - name: acl
+            config:
+              hide_groups_header: true
+              allow:
+                - admin
+      - name: dashboard
+        _comment: 'Studio: /* -> http://supabase-dev-supabase-studio:3000/*'
+        url: http://supabase-dev-supabase-studio:3000/
+        routes:
+          - name: dashboard-all
+            strip_path: true
+            paths:
+              - /
+        plugins:
+          - name: cors
+          - name: basic-auth
+            config:
+              hide_credentials: true
+    
+
+---
+# Source: supabase/templates/persistence.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: supabase-dev-functions
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "1Gi"
+
+---
+# Source: supabase/templates/persistence.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: supabase-dev-imgproxy
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "1Gi"
+
+---
+# Source: supabase/templates/persistence.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: supabase-dev-snippets
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "1Gi"
+
+---
+# Source: supabase/templates/persistence.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: supabase-dev-storage
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "1Gi"
+
+---
+# Source: supabase/templates/persistence.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: supabase-dev-deno
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "1Gi"
+
+---
+# Source: supabase/templates/auth/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: supabase-dev-supabase-auth
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: auth
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9999
+      targetPort: 9999
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: supabase-auth
+    app.kubernetes.io/instance: supabase-dev
+
+---
+# Source: supabase/templates/functions/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: supabase-dev-supabase-functions
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: functions
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9000
+      targetPort: 9000
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: supabase-functions
+    app.kubernetes.io/instance: supabase-dev
+
+---
+# Source: supabase/templates/imgproxy/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: supabase-dev-supabase-imgproxy
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: imgproxy
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5001
+      targetPort: 5001
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: supabase-imgproxy
+    app.kubernetes.io/instance: supabase-dev
+
+---
+# Source: supabase/templates/kong/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: supabase-dev-supabase-kong
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: kong
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: supabase-kong
+    app.kubernetes.io/instance: supabase-dev
+
+---
+# Source: supabase/templates/meta/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: supabase-dev-supabase-meta
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: meta
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: supabase-meta
+    app.kubernetes.io/instance: supabase-dev
+
+---
+# Source: supabase/templates/realtime/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: supabase-dev-supabase-realtime
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: realtime
+spec:
+  type: ClusterIP
+  ports:
+    - port: 4000
+      targetPort: 4000
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: supabase-realtime
+    app.kubernetes.io/instance: supabase-dev
+
+---
+# Source: supabase/templates/rest/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: supabase-dev-supabase-rest
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: rest
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: supabase-rest
+    app.kubernetes.io/instance: supabase-dev
+
+---
+# Source: supabase/templates/storage/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: supabase-dev-supabase-storage
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: storage
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5000
+      targetPort: 5000
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: supabase-storage
+    app.kubernetes.io/instance: supabase-dev
+
+---
+# Source: supabase/templates/studio/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: supabase-dev-supabase-studio
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: studio
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: supabase-studio
+    app.kubernetes.io/instance: supabase-dev
+
+---
+# Source: supabase/templates/auth/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supabase-dev-supabase-auth
+  namespace: supabase
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: supabase-auth
+      app.kubernetes.io/instance: supabase-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: supabase-auth
+        app.kubernetes.io/instance: supabase-dev
+    spec:
+      serviceAccountName: supabase-dev-supabase-auth
+      automountServiceAccountToken: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        null
+      initContainers:
+        - name: init-db
+          image: "postgres:17-alpine"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: port
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              until pg_isready -h $(DB_HOST) -p $(DB_PORT) -U postgres; do
+              echo "Waiting for database to start..."
+              sleep 2
+              done
+            - echo "Database is ready"
+          securityContext:
+            {}
+      containers:
+        - name: supabase-auth
+          image: "supabase/gotrue:v2.189.0"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 9999
+              protocol: TCP
+          env:
+            - name: DB_DRIVER
+              value: "postgres"
+            - name: DB_USER
+              value: "supabase_auth_admin"
+            - name: DB_SSL
+              value: "disable"
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: port
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: password
+            - name: DB_PASSWORD_ENC
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: database
+            - name: GOTRUE_DB_DATABASE_URL
+              value: $(DB_DRIVER)://$(DB_USER):$(DB_PASSWORD_ENC)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=$(DB_SSL)
+            - name: GOTRUE_DB_DRIVER
+              value: $(DB_DRIVER)
+            - name: GOTRUE_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: secret
+            - name: GOTRUE_SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-smtp
+                  key: username
+            - name: GOTRUE_SMTP_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-smtp
+                  key: password
+            
+            - name: API_EXTERNAL_URL
+              value: "http://supabase.local"
+            - name: GOTRUE_API_HOST
+              value: "0.0.0.0"
+            - name: GOTRUE_API_PORT
+              value: "9999"
+            - name: GOTRUE_SITE_URL
+              value: "http://supabase.local"
+            - name: GOTRUE_URI_ALLOW_LIST
+              value: "*"
+            - name: GOTRUE_DISABLE_SIGNUP
+              value: "false"
+            - name: GOTRUE_JWT_DEFAULT_GROUP_NAME
+              value: "authenticated"
+            - name: GOTRUE_JWT_ADMIN_ROLES
+              value: "service_role"
+            - name: GOTRUE_JWT_AUD
+              value: "authenticated"
+            - name: GOTRUE_JWT_EXP
+              value: "3600"
+            - name: GOTRUE_EXTERNAL_EMAIL_ENABLED
+              value: "true"
+            - name: GOTRUE_MAILER_AUTOCONFIRM
+              value: "true"
+            - name: GOTRUE_EXTERNAL_ANONYMOUS_USERS_ENABLED
+              value: "false"
+            - name: GOTRUE_SMTP_ADMIN_EMAIL
+              value: "SMTP_ADMIN_MAIL"
+            - name: GOTRUE_SMTP_HOST
+              value: "SMTP_HOST"
+            - name: GOTRUE_SMTP_PORT
+              value: "123"
+            - name: GOTRUE_EXTERNAL_PHONE_ENABLED
+              value: "false"
+            - name: GOTRUE_SMS_AUTOCONFIRM
+              value: "false"
+            - name: GOTRUE_SMTP_SENDER_NAME
+              value: "SMTP_SENDER_NAME"
+            - name: GOTRUE_MAILER_URLPATHS_INVITE
+              value: "/auth/v1/verify"
+            - name: GOTRUE_MAILER_URLPATHS_CONFIRMATION
+              value: "/auth/v1/verify"
+            - name: GOTRUE_MAILER_URLPATHS_RECOVERY
+              value: "/auth/v1/verify"
+            - name: GOTRUE_MAILER_URLPATHS_EMAIL_CHANGE
+              value: "/auth/v1/verify"
+          securityContext:
+            {}
+
+---
+# Source: supabase/templates/functions/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supabase-dev-supabase-functions
+  namespace: supabase
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: supabase-functions
+      app.kubernetes.io/instance: supabase-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: supabase-functions
+        app.kubernetes.io/instance: supabase-dev
+      annotations:
+        # Roll the functions pod whenever the bundled "main" router source
+        # changes (files/functions/index.ts). Without this, chart bumps that
+        # update the router silently leave running pods on the old code.
+        # Matches the pattern already used by the vector Deployment in this
+        # chart.
+        checksum/config: 635ecfff85d5a162c4ed2dcfa180909d3607040b35225c207d913d6be201481d
+    spec:
+      serviceAccountName: supabase-dev-supabase-functions
+      automountServiceAccountToken: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        null
+      containers:
+        - name: supabase-functions
+          image: "supabase/edge-runtime:v1.74.0"
+          imagePullPolicy: IfNotPresent
+          args:
+            - start
+            - --main-service
+            - /home/deno/functions/main
+          env:
+            - name: SUPABASE_URL
+              value: http://supabase-dev-supabase-kong:8000
+
+            - name: DB_DRIVER
+              value: "postgresql"
+            - name: DB_USERNAME
+              value: "postgres"
+            - name: DB_SSL
+              value: "disable"
+            - name: DB_HOSTNAME
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: port
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: password
+            - name: DB_PASSWORD_ENC
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: password
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: database
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: secret
+            - name: SUPABASE_ANON_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: anonKey
+            - name: SUPABASE_SERVICE_ROLE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: serviceKey
+            - name: SUPABASE_PUBLISHABLE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-apikey
+                  key: publishableKey
+            - name: SUPABASE_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-apikey
+                  key: secretKey
+            - name: SUPABASE_PUBLISHABLE_KEYS
+              value: '{"default":"$(SUPABASE_PUBLISHABLE_KEY)"}'
+            - name: SUPABASE_SECRET_KEYS
+              value: '{"default":"$(SUPABASE_SECRET_KEY)"}'
+            - name: SUPABASE_DB_URL
+              value: $(DB_DRIVER)://$(DB_USERNAME):$(DB_PASSWORD_ENC)@$(DB_HOSTNAME):$(DB_PORT)/$(DB_DATABASE)?search_path=auth&sslmode=$(DB_SSL)
+            
+            - name: VERIFY_JWT
+              value: "false"
+          volumeMounts:
+            - name: functions-storage
+              mountPath: /home/deno/functions
+            - name: deno-cache
+              mountPath: /root/.cache/deno
+            - mountPath: /home/deno/functions/main/index.ts
+              name: functions-main
+              subPath: index.ts
+          securityContext:
+            {}
+      volumes:
+        - name: functions-storage
+          persistentVolumeClaim:
+            claimName: supabase-dev-functions
+        - name: deno-cache
+          persistentVolumeClaim:
+            claimName: supabase-dev-deno
+        - name: functions-main
+          configMap:
+            name: supabase-dev-supabase-functions-main
+
+---
+# Source: supabase/templates/imgproxy/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supabase-dev-supabase-imgproxy
+  namespace: supabase
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: supabase-imgproxy
+      app.kubernetes.io/instance: supabase-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: supabase-imgproxy
+        app.kubernetes.io/instance: supabase-dev
+    spec:
+      serviceAccountName: supabase-dev-supabase-imgproxy
+      automountServiceAccountToken: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        null
+      containers:
+        - name: supabase-imgproxy
+          image: "darthsim/imgproxy:v3.30.1"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            
+            - name: IMGPROXY_BIND
+              value: ":5001"
+            - name: IMGPROXY_LOCAL_FILESYSTEM_ROOT
+              value: "/"
+            - name: IMGPROXY_USE_ETAG
+              value: "true"
+            - name: IMGPROXY_ENABLE_WEBP_DETECTION
+              value: "true"
+          volumeMounts:
+            - mountPath: /var/lib/storage
+              name: imgproxy-volume
+          securityContext:
+            {}
+      volumes:
+        - name: imgproxy-volume
+          persistentVolumeClaim:
+            claimName: supabase-dev-imgproxy
+
+---
+# Source: supabase/templates/kong/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supabase-dev-supabase-kong
+  namespace: supabase
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: supabase-kong
+      app.kubernetes.io/instance: supabase-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: supabase-kong
+        app.kubernetes.io/instance: supabase-dev
+      annotations:
+        # Roll the Kong pod whenever its routing config changes. Without this,
+        # toggling any deployment.<svc>.enabled (which adds/removes Kong routes)
+        # silently leaves Kong running with stale config until something else
+        # forces a roll. Matches the pattern already used by the vector
+        # Deployment in this chart.
+        # https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments
+        checksum/config: 8bf048076256373d12fb8447365c99a2f2a481cae7da73facc7660e4d888d362
+    spec:
+      serviceAccountName: supabase-dev-supabase-kong
+      automountServiceAccountToken: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        null
+      containers:
+        - name: supabase-kong
+          image: "kong/kong:3.9.1"
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/bash"]
+          args: ["/scripts/kong-entrypoint.sh"]
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          env:
+            - name: SUPABASE_ANON_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: anonKey
+            - name: SUPABASE_SERVICE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: serviceKey
+            - name: SUPABASE_PUBLISHABLE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-apikey
+                  key: publishableKey
+            - name: SUPABASE_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-apikey
+                  key: secretKey
+            - name: ANON_KEY_ASYMMETRIC
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-apikey
+                  key: anonKeyAsymmetric
+            - name: SERVICE_ROLE_KEY_ASYMMETRIC
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-apikey
+                  key: serviceRoleKeyAsymmetric
+            - name: DASHBOARD_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-dashboard
+                  key: username
+            - name: DASHBOARD_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-dashboard
+                  key: password
+            
+            - name: KONG_DATABASE
+              value: "off"
+            - name: KONG_DECLARATIVE_CONFIG
+              value: "/usr/local/kong/kong.yml"
+            - name: KONG_DNS_ORDER
+              value: "LAST,A,CNAME"
+            - name: KONG_PLUGINS
+              value: "request-transformer,cors,key-auth,acl,basic-auth,post-function"
+            - name: KONG_NGINX_PROXY_PROXY_BUFFER_SIZE
+              value: "160k"
+            - name: KONG_NGINX_PROXY_PROXY_BUFFERS
+              value: "64 160k"
+            - name: KONG_LOG_LEVEL
+              value: "warn"
+            - name: KONG_NGINX_WORKER_PROCESSES
+              value: "2"
+          volumeMounts:
+            - mountPath: /usr/local/kong/template.yml
+              name: config
+              subPath: template.yml
+            - mountPath: /scripts
+              name: wrapper
+          securityContext:
+            {}
+      volumes:
+        - name: config
+          configMap:
+            name: supabase-dev-supabase-kong
+            defaultMode: 0777
+            items:
+            - key: kong.yml
+              path: template.yml
+        - name: wrapper
+          configMap:
+            name: supabase-dev-supabase-kong
+            defaultMode: 0777
+            items:
+            - key: kong-entrypoint.sh
+              path: kong-entrypoint.sh
+
+---
+# Source: supabase/templates/meta/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supabase-dev-supabase-meta
+  namespace: supabase
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: supabase-meta
+      app.kubernetes.io/instance: supabase-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: supabase-meta
+        app.kubernetes.io/instance: supabase-dev
+    spec:
+      serviceAccountName: supabase-dev-supabase-meta
+      automountServiceAccountToken: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        null
+      containers:
+        - name: supabase-meta
+          image: "supabase/postgres-meta:v0.96.6"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: DB_USER
+              value: "supabase_admin"
+            - name: DB_SSL
+              value: "disable"
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: port
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: database
+            - name: PG_META_DB_HOST
+              value: $(DB_HOST)
+            - name: PG_META_DB_PORT
+              value: $(DB_PORT)
+            - name: PG_META_DB_NAME
+              value: $(DB_NAME)
+            - name: PG_META_DB_USER
+              value: $(DB_USER)
+            - name: PG_META_DB_PASSWORD
+              value: $(DB_PASSWORD)
+            - name: PG_META_DB_SSL_MODE
+              value: $(DB_SSL)
+            - name: CRYPTO_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-meta
+                  key: cryptoKey
+            
+            - name: DB_DRIVER
+              value: "postgres"
+            - name: PG_META_PORT
+              value: "8080"
+          securityContext:
+            {}
+
+---
+# Source: supabase/templates/realtime/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supabase-dev-supabase-realtime
+  namespace: supabase
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: supabase-realtime
+      app.kubernetes.io/instance: supabase-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: supabase-realtime
+        app.kubernetes.io/instance: supabase-dev
+    spec:
+      serviceAccountName: supabase-dev-supabase-realtime
+      automountServiceAccountToken: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        null
+      initContainers:
+        - name: init-db
+          image: "postgres:17-alpine"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: port
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              until pg_isready -h $(DB_HOST) -p $(DB_PORT) -U postgres; do
+              echo "Waiting for database to start..."
+              sleep 2
+              done
+            - echo "Database is ready"
+          securityContext:
+            {}
+      containers:
+        - name: supabase-realtime
+          image: "supabase/realtime:v2.102.3"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 4000
+              protocol: TCP
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: port
+            - name: SELF_HOST_TENANT_NAME
+              value: supabase-dev-supabase-realtime
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: database
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: secret
+            - name: METRICS_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: secret
+            - name: API_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: secret
+
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-realtime
+                  key: secretKeyBase
+            - name: DB_ENC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-realtime
+                  key: dbEncKey
+            
+            - name: DB_USER
+              value: "supabase_admin"
+            - name: DB_SSL
+              value: "false"
+            - name: PORT
+              value: "4000"
+            - name: FLY_ALLOC_ID
+              value: "fly123"
+            - name: FLY_APP_NAME
+              value: "realtime"
+            - name: ENABLE_TAILSCALE
+              value: "false"
+            - name: DB_AFTER_CONNECT_QUERY
+              value: "SET search_path TO _realtime"
+            - name: ERL_AFLAGS
+              value: "-proto_dist inet_tcp"
+            - name: DNS_NODES
+              value: "''"
+            - name: RLIMIT_NOFILE
+              value: "10000"
+            - name: APP_NAME
+              value: "realtime"
+            - name: SEED_SELF_HOST
+              value: "true"
+            - name: RUN_JANITOR
+              value: "true"
+          securityContext:
+            {}
+
+---
+# Source: supabase/templates/rest/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supabase-dev-supabase-rest
+  namespace: supabase
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: supabase-rest
+      app.kubernetes.io/instance: supabase-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: supabase-rest
+        app.kubernetes.io/instance: supabase-dev
+    spec:
+      serviceAccountName: supabase-dev-supabase-rest
+      automountServiceAccountToken: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        null
+      initContainers:
+        - name: init-db
+          image: "postgres:17-alpine"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: port
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              until pg_isready -h $(DB_HOST) -p $(DB_PORT) -U postgres; do
+              echo "Waiting for database to start..."
+              sleep 2
+              done
+            - echo "Database is ready"
+          securityContext:
+            {}
+      containers:
+        - name: supabase-rest
+          image: "postgrest/postgrest:v14.12"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: DB_DRIVER
+              value: "postgres"
+            - name: DB_USER
+              value: "authenticator"
+            - name: DB_SSL
+              value: "disable"
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: port
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: password
+            - name: DB_PASSWORD_ENC
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: database
+            - name: PGRST_DB_URI
+              value: $(DB_DRIVER)://$(DB_USER):$(DB_PASSWORD_ENC)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=$(DB_SSL)
+            - name: PGRST_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: secret
+            - name: PGRST_APP_SETTINGS_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: secret
+            
+            - name: PGRST_DB_SCHEMAS
+              value: "public,storage,graphql_public"
+            - name: PGRST_DB_ANON_ROLE
+              value: "anon"
+            - name: PGRST_DB_USE_LEGACY_GUCS
+              value: "false"
+            - name: PGRST_APP_SETTINGS_JWT_EXP
+              value: "3600"
+          securityContext:
+            {}
+
+---
+# Source: supabase/templates/storage/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supabase-dev-supabase-storage
+  namespace: supabase
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: supabase-storage
+      app.kubernetes.io/instance: supabase-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: supabase-storage
+        app.kubernetes.io/instance: supabase-dev
+    spec:
+      serviceAccountName: supabase-dev-supabase-storage
+      automountServiceAccountToken: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        null
+      initContainers:
+        - name: init-db
+          image: "postgres:17-alpine"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: port
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              until pg_isready -h $(DB_HOST) -p $(DB_PORT) -U postgres; do
+              echo "Waiting for database to start..."
+              sleep 2
+              done
+            - echo "Database is ready"
+          securityContext:
+            {}
+      containers:
+        - name: supabase-storage
+          image: "supabase/storage-api:v1.60.4"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+          env:
+            - name: STORAGE_BACKEND
+              value: "file"
+            - name: DB_DRIVER
+              value: "postgres"
+            - name: DB_USER
+              value: "supabase_storage_admin"
+            - name: DB_SSL
+              value: "disable"
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: port
+            - name: POSTGREST_URL
+              value: http://supabase-dev-supabase-rest:3000
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: password
+            - name: DB_PASSWORD_ENC
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: database
+            - name: DATABASE_URL
+              value: $(DB_DRIVER)://$(DB_USER):$(DB_PASSWORD_ENC)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=$(DB_SSL)
+            - name: PGRST_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: secret
+            - name: AUTH_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: secret
+            - name: ANON_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: anonKey
+            - name: SERVICE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: serviceKey
+            - name: S3_PROTOCOL_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-s3
+                  key: keyId
+            - name: S3_PROTOCOL_ACCESS_KEY_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-s3
+                  key: accessKey
+            - name: IMGPROXY_URL
+              value: http://supabase-dev-supabase-imgproxy:5001
+            
+            - name: REQUEST_ALLOW_X_FORWARDED_PATH
+              value: "true"
+            - name: FILE_SIZE_LIMIT
+              value: "52428800"
+            - name: FILE_STORAGE_BACKEND_PATH
+              value: "/var/lib/storage"
+            - name: TENANT_ID
+              value: "stub"
+            - name: REGION
+              value: "stub"
+            - name: GLOBAL_S3_BUCKET
+              value: "stub"
+            - name: ENABLE_IMAGE_TRANSFORMATION
+              value: "true"
+          volumeMounts:
+            - mountPath: /var/lib/storage
+              name: storage-data
+          securityContext:
+            {}
+      volumes:
+        - name: storage-data
+          persistentVolumeClaim:
+            claimName: supabase-dev-storage
+
+---
+# Source: supabase/templates/studio/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supabase-dev-supabase-studio
+  namespace: supabase
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: supabase-studio
+      app.kubernetes.io/instance: supabase-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: supabase-studio
+        app.kubernetes.io/instance: supabase-dev
+    spec:
+      serviceAccountName: supabase-dev-supabase-studio
+      automountServiceAccountToken: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        null
+      containers:
+        - name: supabase-studio
+          image: "supabase/studio:2026.08.03-sha-022b374"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: SUPABASE_URL
+              value: http://supabase-dev-supabase-kong:8000
+            - name: STUDIO_PG_META_URL
+              value: http://supabase-dev-supabase-meta:8080
+            - name: POSTGRES_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: host
+            - name: POSTGRES_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: port
+
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: database
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-external-db
+                  key: password
+
+            - name: PG_META_CRYPTO_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-meta
+                  key: cryptoKey
+
+
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-dashboard
+                  key: openAiApiKey
+
+            - name: SUPABASE_ANON_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: anonKey
+
+            - name: SUPABASE_SERVICE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: serviceKey
+
+            - name: AUTH_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-jwt
+                  key: secret
+            - name: ENABLED_FEATURES_LOGS_ALL
+              value: "false"
+            - name: EDGE_FUNCTIONS_MANAGEMENT_FOLDER
+              value: /home/deno/functions
+            - name: SNIPPETS_MANAGEMENT_FOLDER
+              value: /app/snippets
+            
+            - name: HOSTNAME
+              value: "::"
+            - name: STUDIO_PORT
+              value: "3000"
+            - name: DEFAULT_ORGANIZATION_NAME
+              value: "Default Organization"
+            - name: DEFAULT_PROJECT_NAME
+              value: "Default Project"
+            - name: SUPABASE_PUBLIC_URL
+              value: "http://supabase.local"
+            - name: NEXT_ANALYTICS_BACKEND_PROVIDER
+              value: "postgres"
+          volumeMounts:
+            - name: functions-storage
+              mountPath: /home/deno/functions
+            - name: snippets-storage
+              mountPath: /app/snippets
+          securityContext:
+            {}
+      volumes:
+        - name: functions-storage
+          persistentVolumeClaim:
+            claimName: supabase-dev-functions
+        - name: snippets-storage
+          persistentVolumeClaim:
+            claimName: supabase-dev-snippets
+
+---
+# Source: supabase/templates/kong/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: supabase-dev-supabase-kong
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "supabase.local"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: supabase-dev-supabase-kong
+                port:
+                  number: 8000
+---
+# Source: supabase/templates/test/auth.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: supabase-dev-test-auth
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+        - name: test-auth
+          image: kdevup/curljq
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/bash
+            - -c
+            - |
+              curl -sfo /dev/null \
+                http://supabase-dev-supabase-auth:9999/health
+              echo "Sevice supabase-dev-supabase-auth is healthy."
+      restartPolicy: Never
+
+---
+# Source: supabase/templates/test/imgproxy.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: supabase-dev-test-imgproxy
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+        - name: test-imgproxy
+          image: kdevup/curljq
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/bash
+            - -c
+            - |
+              curl -sfo /dev/null \
+                http://supabase-dev-supabase-imgproxy:5001/health
+              echo "Sevice supabase-dev-supabase-imgproxy is healthy."
+      restartPolicy: Never
+
+---
+# Source: supabase/templates/test/kong.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: supabase-dev-test-kong
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+        - env:
+            - name: DASHBOARD_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-dashboard
+                  key: username
+            - name: DASHBOARD_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-dev-dashboard
+                  key: password
+          name: test-kong
+          image: kdevup/curljq
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/bash
+            - -c
+            - |
+              echo "Attempting to access dashboard with provided credentials..."
+              curl -sL --fail \
+                -o /dev/null \
+                "http://${DASHBOARD_USERNAME}:${DASHBOARD_PASSWORD}@supabase-dev-supabase-kong:8000" \
+                || ( echo -e "\e[0;31mFailed to get a valid response." && exit 1 )
+              echo "Successfully connected."
+      restartPolicy: Never
+
+---
+# Source: supabase/templates/test/meta.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: supabase-dev-test-meta
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+        - name: test-meta
+          image: kdevup/curljq
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/bash
+            - -c
+            - |
+              curl -sfo /dev/null \
+                http://supabase-dev-supabase-meta:8080/health
+              echo "Sevice supabase-dev-supabase-meta is healthy."
+      restartPolicy: Never
+
+---
+# Source: supabase/templates/test/realtime.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: supabase-dev-test-realtime
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+        - name: test-realtime
+          image: kdevup/curljq
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/bash
+            - -c
+            - |
+              curl -sfo /dev/null \
+                http://supabase-dev-supabase-realtime:4000
+              echo "Sevice supabase-dev-supabase-realtime is healthy."
+      restartPolicy: Never
+
+---
+# Source: supabase/templates/test/rest.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: supabase-dev-test-rest
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+        - name: test-rest
+          image: kdevup/curljq
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/bash
+            - -c
+            - |
+              curl -sfo /dev/null \
+                http://supabase-dev-supabase-rest:3000
+              echo "Sevice supabase-dev-supabase-rest is healthy."
+      restartPolicy: Never
+
+---
+# Source: supabase/templates/test/storage.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: supabase-dev-test-storage
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+        - name: test-storage
+          image: kdevup/curljq
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/bash
+            - -c
+            - |
+              curl -sfo /dev/null \
+                http://supabase-dev-supabase-storage:5000/status
+              echo "Sevice supabase-dev-supabase-storage is healthy."
+      restartPolicy: Never
+
+---
+# Source: supabase/templates/test/studio.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: supabase-dev-test-studio
+  labels:
+    helm.sh/chart: supabase-0.8.0
+    app.kubernetes.io/name: supabase
+    app.kubernetes.io/instance: supabase-dev
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+        - name: test-studio
+          image: kdevup/curljq
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/bash
+            - -c
+            - |
+              curl -sfo /dev/null \
+                http://supabase-dev-supabase-studio:3000/api/profile
+              echo "Sevice supabase-dev-supabase-studio is healthy."
+      restartPolicy: Never
+

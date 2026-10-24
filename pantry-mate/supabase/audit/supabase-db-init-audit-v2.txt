@@ -1,0 +1,132 @@
+===== SETTINGS =====
+Defaulted container "supabase-db" out of: supabase-db, init-pgsodium (init), init-db (init)
+pg_stat_statements, pgaudit, plpgsql, plpgsql_check, pg_cron, pg_net, pgsodium, auto_explain, pg_tle, plan_filter, supabase_vault
+supautils
+$libdir
+
+===== EXTENSIONS =====
+Defaulted container "supabase-db" out of: supabase-db, init-pgsodium (init), init-db (init)
+pg_net | 0.20.3
+pg_stat_statements | 1.11
+pgcrypto | 1.3
+plpgsql | 1.0
+supabase_vault | 0.3.1
+uuid-ossp | 1.1
+
+===== ROLES =====
+Defaulted container "supabase-db" out of: supabase-db, init-pgsodium (init), init-db (init)
+anon
+authenticated
+authenticator
+service_role
+supabase_admin
+supabase_auth_admin
+supabase_etl_admin
+supabase_functions_admin
+supabase_privileged_role
+supabase_read_only_user
+supabase_replication_admin
+supabase_storage_admin
+
+===== SCHEMAS =====
+Defaulted container "supabase-db" out of: supabase-db, init-pgsodium (init), init-db (init)
+_realtime
+auth
+extensions
+graphql
+graphql_public
+net
+realtime
+storage
+supabase_functions
+vault
+
+===== INIT FILES =====
+Defaulted container "supabase-db" out of: supabase-db, init-pgsodium (init), init-db (init)
+/docker-entrypoint-initdb.d/init-scripts/00-schema.sql
+/docker-entrypoint-initdb.d/init-scripts/00000000000000-initial-schema.sql
+/docker-entrypoint-initdb.d/init-scripts/00000000000001-auth-schema.sql
+/docker-entrypoint-initdb.d/init-scripts/00000000000002-storage-schema.sql
+/docker-entrypoint-initdb.d/init-scripts/00000000000003-post-setup.sql
+/docker-entrypoint-initdb.d/init-scripts/98-webhooks.sql
+/docker-entrypoint-initdb.d/init-scripts/99-jwt.sql
+/docker-entrypoint-initdb.d/init-scripts/99-roles.sql
+/docker-entrypoint-initdb.d/init-scripts/README.md
+/docker-entrypoint-initdb.d/migrate.sh
+/docker-entrypoint-initdb.d/migrations/00-extension.sql
+/docker-entrypoint-initdb.d/migrations/10000000000000_demote-postgres.sql
+/docker-entrypoint-initdb.d/migrations/20211115181400_update-auth-permissions.sql
+/docker-entrypoint-initdb.d/migrations/20211118015519_create-realtime-schema.sql
+/docker-entrypoint-initdb.d/migrations/20211122051245_update-realtime-permissions.sql
+/docker-entrypoint-initdb.d/migrations/20211124212715_update-auth-owner.sql
+/docker-entrypoint-initdb.d/migrations/20211130151719_update-realtime-permissions.sql
+/docker-entrypoint-initdb.d/migrations/20220118070449_enable-safeupdate-postgrest.sql
+/docker-entrypoint-initdb.d/migrations/20220126121436_finer-postgrest-triggers.sql
+/docker-entrypoint-initdb.d/migrations/20220224211803_fix-postgrest-supautils.sql
+/docker-entrypoint-initdb.d/migrations/20220317095840_pg_graphql.sql
+/docker-entrypoint-initdb.d/migrations/20220321174452_fix-postgrest-alter-type-event-trigger.sql
+/docker-entrypoint-initdb.d/migrations/20220322085208_gotrue-session-limit.sql
+/docker-entrypoint-initdb.d/migrations/20220404205710_pg_graphql-on-by-default.sql
+/docker-entrypoint-initdb.d/migrations/20220609081115_grant-supabase-auth-admin-and-supabase-storage-admin-to-postgres.sql
+/docker-entrypoint-initdb.d/migrations/20220613123923_pg_graphql-pg-dump-perms.sql
+/docker-entrypoint-initdb.d/migrations/20220713082019_pg_cron-pg_net-temp-perms-fix.sql
+/docker-entrypoint-initdb.d/migrations/20221028101028_set_authenticator_timeout.sql
+/docker-entrypoint-initdb.d/migrations/20221103090837_revoke_admin.sql
+/docker-entrypoint-initdb.d/migrations/20221207154255_create_pgsodium_and_vault.sql
+/docker-entrypoint-initdb.d/migrations/20230201083204_grant_auth_roles_to_postgres.sql
+/docker-entrypoint-initdb.d/migrations/20230224042246_grant_extensions_perms_for_postgres.sql
+/docker-entrypoint-initdb.d/migrations/20230306081037_grant_pg_monitor_to_postgres.sql
+/docker-entrypoint-initdb.d/migrations/20230327032006_grant_auth_roles_to_supabase_storage_admin.sql
+/docker-entrypoint-initdb.d/migrations/20230529180330_alter_api_roles_for_inherit.sql
+/docker-entrypoint-initdb.d/migrations/20231013070755_grant_authenticator_to_supabase_storage_admin.sql
+/docker-entrypoint-initdb.d/migrations/20231017062225_grant_pg_graphql_permissions_for_custom_roles.sql
+/docker-entrypoint-initdb.d/migrations/20231020085357_revoke_writes_on_cron_job_from_postgres.sql
+/docker-entrypoint-initdb.d/migrations/20231130133139_set_lock_timeout_to_authenticator_role.sql
+/docker-entrypoint-initdb.d/migrations/20240124080435_alter_lo_export_lo_import_owner.sql
+/docker-entrypoint-initdb.d/migrations/20240606060239_grant_predefined_roles_to_postgres.sql
+/docker-entrypoint-initdb.d/migrations/20241031003909_create_orioledb.sql
+/docker-entrypoint-initdb.d/migrations/20241215003910_backfill_pgmq_metadata.sql
+/docker-entrypoint-initdb.d/migrations/20250205060043_disable_log_statement_on_internal_roles.sql
+/docker-entrypoint-initdb.d/migrations/20250205144616_move_orioledb_to_extensions_schema.sql
+/docker-entrypoint-initdb.d/migrations/20250218031949_pgsodium_mask_role.sql
+/docker-entrypoint-initdb.d/migrations/20250220051611_pg_net_perms_fix.sql
+/docker-entrypoint-initdb.d/migrations/20250312095419_pgbouncer_ownership.sql
+/docker-entrypoint-initdb.d/migrations/20250402065937_alter_internal_event_triggers_owner_to_supabase_admin.sql
+/docker-entrypoint-initdb.d/migrations/20250402093753_grant_subscription_to_postgres_16_and_above.sql
+/docker-entrypoint-initdb.d/migrations/20250417190610_update_pgbouncer_get_auth.sql
+/docker-entrypoint-initdb.d/migrations/20250421084701_revoke_admin_roles_from_postgres.sql
+/docker-entrypoint-initdb.d/migrations/20250605172253_grant_with_admin_to_postgres_16_and_above.sql
+/docker-entrypoint-initdb.d/migrations/20250623125453_tmp_grant_storage_tables_to_postgres_with_grant_option.sql
+/docker-entrypoint-initdb.d/migrations/20250709135250_grant_storage_schema_to_postgres_with_grant_option.sql
+/docker-entrypoint-initdb.d/migrations/20250710151649_supabase_read_only_user_default_transaction_read_only.sql
+/docker-entrypoint-initdb.d/migrations/20251001204436_predefined_role_grants.sql
+/docker-entrypoint-initdb.d/migrations/20251105172723_grant_pg_reload_conf_to_postgres.sql
+/docker-entrypoint-initdb.d/migrations/20251121132723_correct_search_path_pgbouncer.sql
+/docker-entrypoint-initdb.d/migrations/20260211120934_supabase_privileged_role.sql
+/docker-entrypoint-initdb.d/migrations/20260413000000_fix-authenticator-session-preload-libraries.sql
+/docker-entrypoint-initdb.d/migrations/20260421000000_pg_graphql-off-by-default.sql
+/docker-entrypoint-initdb.d/migrations/20260421000001_rescope_pg_graphql_access_trigger.sql
+/docker-entrypoint-initdb.d/migrations/97-_supabase.sql
+/docker-entrypoint-initdb.d/migrations/99-logs.sql
+/docker-entrypoint-initdb.d/migrations/99-pooler.sql
+/docker-entrypoint-initdb.d/migrations/99-realtime.sql
+/etc/postgresql-custom/conf.d/.gitkeep
+/etc/postgresql-custom/conf.d/auto_explain.conf
+/etc/postgresql-custom/conf.d/custom_overrides.conf
+/etc/postgresql-custom/conf.d/generated_optimizations.conf
+/etc/postgresql-custom/conf.d/pg_cron.conf
+/etc/postgresql-custom/extension-custom-scripts/before-create.sql
+/etc/postgresql-custom/extension-custom-scripts/dblink/after-create.sql
+/etc/postgresql-custom/extension-custom-scripts/pg_cron/after-create.sql
+/etc/postgresql-custom/extension-custom-scripts/pg_repack/after-create.sql
+/etc/postgresql-custom/extension-custom-scripts/pg_tle/after-create.sql
+/etc/postgresql-custom/extension-custom-scripts/pgmq/after-create.sql
+/etc/postgresql-custom/extension-custom-scripts/pgsodium/after-create.sql
+/etc/postgresql-custom/extension-custom-scripts/pgsodium/before-create.sql
+/etc/postgresql-custom/extension-custom-scripts/postgis_tiger_geocoder/after-create.sql
+/etc/postgresql-custom/extension-custom-scripts/postgres_fdw/after-create.sql
+/etc/postgresql-custom/extension-custom-scripts/supabase_vault/after-create.sql
+/etc/postgresql-custom/pgsodium_root.key
+/etc/postgresql-custom/read-replica.conf
+/etc/postgresql-custom/supautils.conf
+/etc/postgresql-custom/wal-g.conf

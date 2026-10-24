@@ -1,0 +1,193 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"postgresql.cnpg.io/v1","kind":"Cluster","metadata":{"annotations":{},"name":"pantry-postgres","namespace":"database"},"spec":{"affinity":{"nodeSelector":{"role":"postgres"}},"bootstrap":{"initdb":{"database":"pantry","owner":"pantry_app","secret":{"name":"pantry-postgres-app"}}},"imageName":"ghcr.io/cloudnative-pg/postgresql:17","instances":1,"resources":{"limits":{"cpu":"2","memory":"4Gi"},"requests":{"cpu":"500m","memory":"1Gi"}},"storage":{"size":"20Gi","storageClass":"local-path"}}}
+  creationTimestamp: "2026-09-08T06:41:46Z"
+  generation: 1
+  name: pantry-postgres
+  namespace: database
+  resourceVersion: "158533"
+  uid: 47d85c4d-283e-4198-81e8-876028ac70b0
+spec:
+  affinity:
+    nodeSelector:
+      role: postgres
+    podAntiAffinityType: preferred
+  bootstrap:
+    initdb:
+      database: pantry
+      encoding: UTF8
+      localeCType: C
+      localeCollate: C
+      owner: pantry_app
+      secret:
+        name: pantry-postgres-app
+  enablePDB: true
+  enableSuperuserAccess: false
+  failoverDelay: 0
+  imageName: ghcr.io/cloudnative-pg/postgresql:17
+  instances: 1
+  logLevel: info
+  maxSyncReplicas: 0
+  minSyncReplicas: 0
+  monitoring:
+    customQueriesConfigMap:
+    - key: queries
+      name: cnpg-default-monitoring
+    disableDefaultQueries: false
+    enablePodMonitor: false
+  postgresGID: 26
+  postgresUID: 26
+  postgresql:
+    parameters:
+      archive_mode: "on"
+      archive_timeout: 5min
+      dynamic_shared_memory_type: posix
+      full_page_writes: "on"
+      log_destination: csvlog
+      log_directory: /controller/log
+      log_filename: postgres
+      log_rotation_age: "0"
+      log_rotation_size: "0"
+      log_truncate_on_rotation: "false"
+      logging_collector: "on"
+      max_parallel_workers: "32"
+      max_replication_slots: "32"
+      max_worker_processes: "32"
+      shared_memory_type: mmap
+      shared_preload_libraries: ""
+      ssl_max_protocol_version: TLSv1.3
+      ssl_min_protocol_version: TLSv1.3
+      wal_keep_size: 512MB
+      wal_level: logical
+      wal_log_hints: "on"
+      wal_receiver_timeout: 5s
+      wal_sender_timeout: 5s
+    syncReplicaElectionConstraint:
+      enabled: false
+  primaryUpdateMethod: restart
+  primaryUpdateStrategy: unsupervised
+  probes:
+    liveness:
+      isolationCheck:
+        connectionTimeout: 1000
+        enabled: true
+        requestTimeout: 1000
+  replicationSlots:
+    highAvailability:
+      enabled: true
+      slotPrefix: _cnpg_
+    synchronizeReplicas:
+      enabled: true
+    updateInterval: 30
+  resources:
+    limits:
+      cpu: "2"
+      memory: 4Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
+  smartShutdownTimeout: 180
+  startDelay: 3600
+  stopDelay: 1800
+  storage:
+    resizeInUseVolumes: true
+    size: 20Gi
+    storageClass: local-path
+  switchoverDelay: 3600
+status:
+  availableArchitectures:
+  - goArch: amd64
+    hash: 495c8f8b99d3a01b461bcffa8f9ef3cba7eb381e2b19f7af48b81c42270f0759
+  - goArch: arm64
+    hash: 101495327b17038a7f67e48a66f8be7bbcad798b1601a41fde435c22beeebd91
+  certificates:
+    clientCASecret: pantry-postgres-ca
+    expirations:
+      pantry-postgres-ca: 2026-12-07 06:36:46 +0000 UTC
+      pantry-postgres-replication: 2026-12-07 06:36:46 +0000 UTC
+      pantry-postgres-server: 2026-12-07 06:36:46 +0000 UTC
+    replicationTLSSecret: pantry-postgres-replication
+    serverAltDNSNames:
+    - pantry-postgres-rw
+    - pantry-postgres-rw.database
+    - pantry-postgres-rw.database.svc
+    - pantry-postgres-rw.database.svc.cluster.local
+    - pantry-postgres-r
+    - pantry-postgres-r.database
+    - pantry-postgres-r.database.svc
+    - pantry-postgres-r.database.svc.cluster.local
+    - pantry-postgres-ro
+    - pantry-postgres-ro.database
+    - pantry-postgres-ro.database.svc
+    - pantry-postgres-ro.database.svc.cluster.local
+    serverCASecret: pantry-postgres-ca
+    serverTLSSecret: pantry-postgres-server
+  cloudNativePGCommitHash: 94ee31178
+  cloudNativePGOperatorHash: 495c8f8b99d3a01b461bcffa8f9ef3cba7eb381e2b19f7af48b81c42270f0759
+  conditions:
+  - lastTransitionTime: "2026-09-12T06:53:05Z"
+    message: A single, unique system ID was found across reporting instances.
+    reason: Unique
+    status: "True"
+    type: ConsistentSystemID
+  - lastTransitionTime: "2026-09-12T06:53:14Z"
+    message: Cluster is Ready
+    reason: ClusterIsReady
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2026-09-08T06:42:23Z"
+    message: Continuous archiving is working
+    reason: ContinuousArchivingSuccess
+    status: "True"
+    type: ContinuousArchiving
+  configMapResourceVersion:
+    metrics:
+      cnpg-default-monitoring: "19213"
+  currentPrimary: pantry-postgres-1
+  currentPrimaryTimestamp: "2026-09-08T06:42:23.808375Z"
+  healthyPVC:
+  - pantry-postgres-1
+  image: ghcr.io/cloudnative-pg/postgresql:17
+  instanceNames:
+  - pantry-postgres-1
+  instances: 1
+  instancesReportedState:
+    pantry-postgres-1:
+      ip: 192.168.188.26
+      isPrimary: true
+      timeLineID: 1
+  instancesStatus:
+    healthy:
+    - pantry-postgres-1
+  latestGeneratedNode: 1
+  managedRolesStatus: {}
+  pgDataImageInfo:
+    image: ghcr.io/cloudnative-pg/postgresql:17
+    majorVersion: 17
+  phase: Cluster in healthy state
+  poolerIntegrations:
+    pgBouncerIntegration: {}
+  pvcCount: 1
+  readService: pantry-postgres-r
+  readyInstances: 1
+  secretsResourceVersion:
+    applicationSecretVersion: "18585"
+    clientCaSecretVersion: "19188"
+    replicationSecretVersion: "19190"
+    serverCaSecretVersion: "19188"
+    serverSecretVersion: "19189"
+  selector: cnpg.io/cluster=pantry-postgres,cnpg.io/podRole=instance
+  switchReplicaClusterStatus: {}
+  systemID: "7683051121509351443"
+  targetPrimary: pantry-postgres-1
+  targetPrimaryTimestamp: "2026-09-08T06:41:47.051887Z"
+  timelineID: 1
+  topology:
+    instances:
+      pantry-postgres-1: {}
+    nodesUsed: 1
+    successfullyExtracted: true
+  writeService: pantry-postgres-rw

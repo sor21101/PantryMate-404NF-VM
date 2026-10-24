@@ -1,0 +1,1397 @@
+## Supabase Helm Chart Configuration
+##
+## Supabase is composed of multiple services running together
+## to provide a full backend platform. This chart deploys and
+## configures the following components:
+##
+## - Kong (API Gateway)
+## - Studio (Admin UI)
+## - Postgres (Database)
+## - PostgREST (REST API)
+## - Realtime (WebSocket server)
+## - Storage API
+## - Postgres Meta
+## - GoTrue (Authentication)
+## - Edge Functions (Deno runtime)
+## - Logflare (Analytics)
+## - Vector (Logs pipeline)
+## - Imgproxy (Image transformation)
+## - MinIO (S3-compatible storage)
+##
+## This chart mirrors the official Supabase
+## Docker setup, adapted for Kubernetes.
+##
+## Reference:
+## https://github.com/supabase/supabase/tree/master/docker
+##
+## Configuration is grouped by domain rather than by component.
+## Each section contains per-component blocks where applicable.
+##
+##  1. secret         - All credentials and sensitive values
+##  2. deployment     - Pod configuration per component
+##  3. image          - Container image settings per component
+##  4. environment    - Environment variables per component
+##  5. persistence    - PVC configuration per component
+##  6. service        - Kubernetes Service configuration per component
+##  7. autoscaling    - HPA configuration per component
+##  8. ingress        - External access configuration
+##  9. serviceAccount - ServiceAccount configuration per component
+## 10. migration      - Optional SQL migration scripts
+## 11. bigQuery       - Optional BigQuery backend configuration
+
+secret:
+  ## JSON Web Tokens
+  ## Used to sign and validate access tokens across all Supabase services
+  ## Docs: https://supabase.com/docs/guides/self-hosting/docker#generate-and-configure-api-keys
+  ##
+  jwt:
+    anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE"
+    serviceKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJzZXJ2aWNlX3JvbGUiLAogICAgImlzcyI6ICJzdXBhYmFzZS1kZW1vIiwKICAgICJpYXQiOiAxNjQxNzY5MjAwLAogICAgImV4cCI6IDE3OTk1MzU2MDAKfQ.DaYlNEoUrrEn2Ig7tqibS-PHK5vgusbcbo7X36XVt4Q"
+    secret: "your-super-secret-jwt-token-with-at-least-32-characters-long"
+
+    ## Reference to existing secret
+    # secretRef: ""
+
+    ## Map to actual keys inside secretRef if they differ
+    # secretRefKey:
+    #   anonKey: anonKey
+    #   serviceKey: serviceKey
+    #   secret: secret
+
+  ## API key material for asymmetric auth support
+  ## Docs: https://supabase.com/docs/guides/self-hosting/self-hosted-auth-keys
+  ##
+  apikey:
+    publishableKey: ""
+    secretKey: ""
+    anonKeyAsymmetric: ""
+    serviceRoleKeyAsymmetric: ""
+    jwtKeys: ""
+    jwtJwks: ""
+
+    ## Reference to existing secret
+    # secretRef: ""
+
+    ## Map to actual keys inside secretRef if they differ
+    # secretRefKey:
+    #   publishableKey: publishableKey
+    #   secretKey: secretKey
+    #   anonKeyAsymmetric: anonKeyAsymmetric
+    #   serviceRoleKeyAsymmetric: serviceRoleKeyAsymmetric
+    #   jwtKeys: jwtKeys
+    #   jwtJwks: jwtJwks
+
+  ## PostgreSQL credentials
+  ## Required even when using an external database
+  ##
+  db:
+    password: "your-super-secret-and-long-postgres-password"
+    database: "postgres"
+
+    ## External database host/port (used when deployment.db.enabled is false).
+    ## Host and port are required when using an external database.
+    ## Ignored when deployment.db.enabled is true (internal DB service is used).
+    ##
+    ## IMPORTANT: when using an external database, it must already be
+    ## initialized with the required Supabase schemas, roles and grants.
+    ## The chart no longer runs automatic migrations against external databases.
+    host: ""
+    port: ""
+
+    ## Reference to existing secret
+    # secretRef: ""
+
+    ## Map to actual keys inside secretRef if they differ
+    # secretRefKey:
+    #   host: host
+    #   port: port
+    #   password: password
+    #   database: database
+
+  ## Logflare credentials
+  ##
+  analytics:
+    publicAccessToken: "your-super-secret-and-long-logflare-key-public"
+    privateAccessToken: "your-super-secret-and-long-logflare-key-private"
+
+    ## Reference to existing secret
+    # secretRef: ""
+
+    ## Map to actual keys inside secretRef if they differ
+    # secretRefKey:
+    #   publicAccessToken: publicAccessToken
+    #   privateAccessToken: privateAccessToken
+
+  ## BigQuery service account credentials
+  ## Used by Logflare when analytics backend is set to BigQuery
+  ##
+  bigquery:
+    gcloudJson: ""
+
+    ## Reference to existing secret
+    # secretRef: ""
+
+    ## Map to actual keys inside secretRef if they differ
+    # secretRefKey:
+    #   gcloudJson: gcloud.json
+
+  ## SMTP credentials
+  ##
+  smtp:
+    username: "fake_mail_user"
+    password: "fake_mail_password"
+
+    ## Reference to existing secret
+    # secretRef: ""
+
+    ## Map to actual keys inside secretRef if they differ
+    # secretRefKey:
+    #   username: username
+    #   password: password
+
+  ## Studio dashboard credentials
+  ##
+  dashboard:
+    username: "supabase"
+    password: "this_password_is_insecure_and_should_be_updated"
+    openAiApiKey: "key_super_secret"
+
+    ## Reference to existing secret
+    # secretRef: ""
+
+    ## Map to actual keys inside secretRef if they differ
+    # secretRefKey:
+    #   username: username
+    #   password: password
+    #   openAiApiKey: openAiApiKey
+
+  ## S3-compatible credentials
+  ##
+  s3:
+    keyId: "625729a08b95bf1b7ff351a663f3a23c"
+    accessKey: "850181e4652dd023b7a98c58ae0d2d34bd487ee0cc3254aed6eda37307425907"
+
+    ## Reference to existing secret
+    # secretRef: ""
+
+    ## Map to actual keys inside secretRef if they differ
+    # secretRefKey:
+    #   keyId: keyId
+    #   accessKey: accessKey
+
+  ## Realtime service
+  ## Docs: https://supabase.com/docs/guides/realtime
+  ##
+  realtime:
+    ## Used by Supabase Realtime (Phoenix) to sign and encrypt internal data,
+    ## sessions and tokens. Equivalent to Phoenix SECRET_KEY_BASE.
+    ## Generate with: openssl rand -base64 64
+    secretKeyBase: "UpNVntn3cDxHJpq99YMc1T1AQgQpc8kfYTuRgBiYa15BLrx8etQoXz3gZv1/u2oq"
+
+    ## Encryption key used by Realtime for sensitive fields in the _realtime schema.
+    ## Must be exactly 16 characters. Generate with: openssl rand -hex 8
+    dbEncKey: "supabaserealtime"
+
+    ## Reference to existing secret
+    # secretRef: ""
+
+    ## Map to actual keys inside secretRef if they differ
+    # secretRefKey:
+    #   secretKeyBase: secretKeyBase
+    #   dbEncKey: dbEncKey
+
+  ## Meta service
+  ## Docs: https://github.com/supabase/postgres-meta
+  ##
+  meta:
+    ## Used to encrypt sensitive metadata at rest.
+    ## Generate with: openssl rand -hex 32
+    cryptoKey: "your-encryption-key-32-chars-min"
+
+    ## Reference to existing secret
+    # secretRef: ""
+
+    ## Map to actual keys inside secretRef if they differ
+    # secretRefKey:
+    #   cryptoKey: cryptoKey
+
+  minio:
+    user: supa-storage
+    password: secret1234
+
+    ## Reference to existing secret
+    # secretRef: ""
+
+    ## Map to actual keys inside secretRef if they differ
+    # secretRefKey:
+    #   user: user
+    #   password: password
+
+deployment:
+  analytics:
+    enabled: false
+    replicaCount: 1
+    nameOverride: ""
+    fullnameOverride: ""
+    labels: {}
+    annotations: {}
+    podAnnotations: {}
+    podSecurityContext:
+    securityContext: {}
+    automountServiceAccountToken: true
+    terminationGracePeriodSeconds: 30
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
+    envFrom: []
+    livenessProbe: {}
+    readinessProbe: {}
+    startupProbe: {}
+    lifecycle: {}
+    resources: {}
+    volumeMounts: {}
+    volumes: {}
+    extraInitContainers: []
+    initDb: true
+
+  auth:
+    enabled: true
+    replicaCount: 1
+    nameOverride: ""
+    fullnameOverride: ""
+    labels: {}
+    annotations: {}
+    podAnnotations: {}
+    podSecurityContext:
+    securityContext: {}
+    automountServiceAccountToken: true
+    terminationGracePeriodSeconds: 30
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
+    dnsPolicy: ""
+    dnsConfig: {}
+    envFrom: []
+    livenessProbe: {}
+    readinessProbe: {}
+    startupProbe: {}
+    lifecycle: {}
+    resources: {}
+    volumeMounts: {}
+    volumes: {}
+    extraInitContainers: []
+    initDb: true
+
+  db:
+    enabled: true
+    replicaCount: 1
+    nameOverride: ""
+    fullnameOverride: ""
+    labels: {}
+    annotations: {}
+    podAnnotations: {}
+    podSecurityContext:
+    securityContext: {}
+    automountServiceAccountToken: true
+    terminationGracePeriodSeconds: 30
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
+    envFrom: []
+    livenessProbe: {}
+    readinessProbe: {}
+    startupProbe: {}
+    lifecycle: {}
+    resources: {}
+    volumeMounts: {}
+    volumes: {}
+    extraInitContainers: []
+    initDb: true
+
+  functions:
+    enabled: true
+    replicaCount: 1
+    nameOverride: ""
+    fullnameOverride: ""
+    labels: {}
+    annotations: {}
+    podAnnotations: {}
+    podSecurityContext:
+    securityContext: {}
+    automountServiceAccountToken: true
+    terminationGracePeriodSeconds: 30
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
+    envFrom: []
+    livenessProbe: {}
+    readinessProbe: {}
+    startupProbe: {}
+    lifecycle: {}
+    resources: {}
+    volumeMounts: {}
+    volumes: {}
+    strategy: {}
+    extraInitContainers: []
+
+  imgproxy:
+    enabled: true
+    replicaCount: 1
+    nameOverride: ""
+    fullnameOverride: ""
+    labels: {}
+    annotations: {}
+    podAnnotations: {}
+    podSecurityContext:
+    securityContext: {}
+    automountServiceAccountToken: true
+    terminationGracePeriodSeconds: 30
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
+    envFrom: []
+    livenessProbe: {}
+    readinessProbe: {}
+    startupProbe: {}
+    lifecycle: {}
+    resources: {}
+    volumeMounts: {}
+    volumes: {}
+
+  kong:
+    enabled: true
+    replicaCount: 1
+    nameOverride: ""
+    fullnameOverride: ""
+    configMapRef: ""
+    labels: {}
+    annotations: {}
+    podAnnotations: {}
+    podSecurityContext:
+    securityContext: {}
+    automountServiceAccountToken: true
+    terminationGracePeriodSeconds: 30
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
+    envFrom: []
+    livenessProbe: {}
+    readinessProbe: {}
+    startupProbe: {}
+    lifecycle: {}
+    resources: {}
+    volumeMounts: {}
+    volumes: {}
+
+  meta:
+    enabled: true
+    replicaCount: 1
+    nameOverride: ""
+    fullnameOverride: ""
+    labels: {}
+    annotations: {}
+    podAnnotations: {}
+    podSecurityContext:
+    securityContext: {}
+    automountServiceAccountToken: true
+    terminationGracePeriodSeconds: 30
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
+    envFrom: []
+    livenessProbe: {}
+    readinessProbe: {}
+    startupProbe: {}
+    lifecycle: {}
+    resources: {}
+    volumeMounts: {}
+    volumes: {}
+
+  minio:
+    enabled: false
+    replicaCount: 1
+    nameOverride: ""
+    fullnameOverride: ""
+    labels: {}
+    annotations: {}
+    podAnnotations: {}
+    podSecurityContext:
+    securityContext: {}
+    automountServiceAccountToken: true
+    terminationGracePeriodSeconds: 30
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
+    envFrom: []
+    livenessProbe: {}
+    readinessProbe: {}
+    startupProbe: {}
+    lifecycle: {}
+    resources: {}
+    volumeMounts: {}
+    volumes: {}
+
+  realtime:
+    enabled: true
+    replicaCount: 1
+    nameOverride: ""
+    fullnameOverride: ""
+    labels: {}
+    annotations: {}
+    podAnnotations: {}
+    podSecurityContext:
+    securityContext: {}
+    automountServiceAccountToken: true
+    terminationGracePeriodSeconds: 30
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
+    dnsPolicy: ""
+    dnsConfig: {}
+    command: []
+    args: []
+    envFrom: []
+    livenessProbe: {}
+    readinessProbe: {}
+    startupProbe: {}
+    lifecycle: {}
+    resources: {}
+    volumeMounts: {}
+    volumes: {}
+    extraInitContainers: []
+    initDb: true
+
+  rest:
+    enabled: true
+    replicaCount: 1
+    nameOverride: ""
+    fullnameOverride: ""
+    labels: {}
+    annotations: {}
+    podAnnotations: {}
+    podSecurityContext:
+    securityContext: {}
+    automountServiceAccountToken: true
+    terminationGracePeriodSeconds: 30
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
+    envFrom: []
+    livenessProbe: {}
+    readinessProbe: {}
+    startupProbe: {}
+    lifecycle: {}
+    resources: {}
+    volumeMounts: {}
+    volumes: {}
+    extraInitContainers: []
+    initDb: true
+
+  storage:
+    enabled: true
+    replicaCount: 1
+    nameOverride: ""
+    fullnameOverride: ""
+    labels: {}
+    annotations: {}
+    podAnnotations: {}
+    podSecurityContext:
+    securityContext: {}
+    automountServiceAccountToken: true
+    terminationGracePeriodSeconds: 30
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
+    envFrom: []
+    livenessProbe: {}
+    readinessProbe: {}
+    startupProbe: {}
+    lifecycle: {}
+    resources: {}
+    volumeMounts: {}
+    volumes: {}
+    extraInitContainers: []
+    initDb: true
+
+  studio:
+    enabled: true
+    replicaCount: 1
+    nameOverride: ""
+    fullnameOverride: ""
+    labels: {}
+    annotations: {}
+    podAnnotations: {}
+    podSecurityContext:
+    securityContext: {}
+    automountServiceAccountToken: true
+    terminationGracePeriodSeconds: 30
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
+    envFrom: []
+    livenessProbe: {}
+    readinessProbe: {}
+    startupProbe: {}
+    lifecycle: {}
+    resources: {}
+    volumeMounts: {}
+    volumes: {}
+    ## Deployment strategy. Set to {type: Recreate} when using persistence.snippets
+    ## with a ReadWriteOnce PVC: the chart's default RollingUpdate causes a
+    ## Multi-Attach error because the new pod is scheduled before the old one
+    ## releases the volume. Studio is single-replica so the brief gap is fine.
+    strategy: {}
+
+  vector:
+    enabled: false
+    replicaCount: 1
+    nameOverride: ""
+    fullnameOverride: ""
+    labels: {}
+    annotations: {}
+    podAnnotations: {}
+    podSecurityContext:
+    securityContext: {}
+    automountServiceAccountToken: true
+    terminationGracePeriodSeconds: 30
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
+    envFrom: []
+    livenessProbe: {}
+    readinessProbe: {}
+    startupProbe: {}
+    lifecycle: {}
+    resources: {}
+    volumeMounts: {}
+    volumes: {}
+
+image:
+  analytics:
+    repository: supabase/logflare
+    pullPolicy: IfNotPresent
+    tag: "1.43.1"
+    pullSecrets: []
+
+  auth:
+    repository: supabase/gotrue
+    pullPolicy: IfNotPresent
+    tag: "v2.189.0"
+    pullSecrets: []
+
+  db:
+    repository: supabase/postgres
+    pullPolicy: IfNotPresent
+    tag: "17.6.1.136"
+    pullSecrets: []
+
+  functions:
+    repository: supabase/edge-runtime
+    pullPolicy: IfNotPresent
+    tag: "v1.74.0"
+    pullSecrets: []
+
+  imgproxy:
+    repository: darthsim/imgproxy
+    pullPolicy: IfNotPresent
+    tag: "v3.30.1"
+    pullSecrets: []
+
+  kong:
+    repository: kong/kong
+    pullPolicy: IfNotPresent
+    tag: "3.9.1"
+    pullSecrets: []
+
+  meta:
+    repository: supabase/postgres-meta
+    pullPolicy: IfNotPresent
+    tag: "v0.96.6"
+    pullSecrets: []
+
+  minio:
+    repository: cgr.dev/chainguard/minio
+    pullPolicy: IfNotPresent
+    tag: "latest"
+    pullSecrets: []
+
+  realtime:
+    repository: supabase/realtime
+    pullPolicy: IfNotPresent
+    tag: "v2.102.3"
+    pullSecrets: []
+
+  rest:
+    repository: postgrest/postgrest
+    pullPolicy: IfNotPresent
+    tag: "v14.12"
+    pullSecrets: []
+
+  storage:
+    repository: supabase/storage-api
+    pullPolicy: IfNotPresent
+    tag: "v1.60.4"
+    pullSecrets: []
+
+  studio:
+    repository: supabase/studio
+    pullPolicy: IfNotPresent
+    tag: "2026.08.03-sha-022b374"
+    pullSecrets: []
+
+  vector:
+    repository: timberio/vector
+    pullPolicy: IfNotPresent
+    tag: "0.53.0-alpine"
+    pullSecrets: []
+
+  initDb:
+    repository: postgres
+    pullPolicy: IfNotPresent
+    tag: "17-alpine"
+
+  minioClient:
+    repository: cgr.dev/chainguard/minio-client
+    pullPolicy: IfNotPresent
+    tag: "latest-dev"
+
+environment:
+  analytics:
+    - name: LOGFLARE_NODE_HOST
+      value: 127.0.0.1
+    - name: DB_SCHEMA
+      value: _analytics
+    - name: POSTGRES_BACKEND_SCHEMA
+      value: _analytics
+    - name: LOGFLARE_SINGLE_TENANT
+      value: "true"
+    - name: LOGFLARE_SUPABASE_MODE
+      value: "true"
+    - name: LOGFLARE_FEATURE_FLAG_OVERRIDE
+      value: multibackend=true
+
+  auth:
+    - name: API_EXTERNAL_URL
+      value: http://supabase.local
+    - name: GOTRUE_API_HOST
+      value: "0.0.0.0"
+    - name: GOTRUE_API_PORT
+      value: "9999"
+    - name: GOTRUE_SITE_URL
+      value: http://supabase.local
+    - name: GOTRUE_URI_ALLOW_LIST
+      value: "*"
+    - name: GOTRUE_DISABLE_SIGNUP
+      value: "false"
+    - name: GOTRUE_JWT_DEFAULT_GROUP_NAME
+      value: authenticated
+    - name: GOTRUE_JWT_ADMIN_ROLES
+      value: service_role
+    - name: GOTRUE_JWT_AUD
+      value: authenticated
+    - name: GOTRUE_JWT_EXP
+      value: "3600"
+    - name: GOTRUE_EXTERNAL_EMAIL_ENABLED
+      value: "true"
+    - name: GOTRUE_MAILER_AUTOCONFIRM
+      value: "true"
+    - name: GOTRUE_EXTERNAL_ANONYMOUS_USERS_ENABLED
+      value: "false"
+    # - name: GOTRUE_MAILER_SECURE_EMAIL_CHANGE_ENABLED
+    #   value: true
+    # - name: GOTRUE_SMTP_MAX_FREQUENCY
+    #   value: 1s
+    - name: GOTRUE_SMTP_ADMIN_EMAIL
+      value: "SMTP_ADMIN_MAIL"
+    - name: GOTRUE_SMTP_HOST
+      value: "SMTP_HOST"
+    - name: GOTRUE_SMTP_PORT
+      value: "123"
+    - name: GOTRUE_EXTERNAL_PHONE_ENABLED
+      value: "false"
+    - name: GOTRUE_SMS_AUTOCONFIRM
+      value: "false"
+    - name: GOTRUE_SMTP_SENDER_NAME
+      value: "SMTP_SENDER_NAME"
+    - name: GOTRUE_MAILER_URLPATHS_INVITE
+      value: "/auth/v1/verify"
+    - name: GOTRUE_MAILER_URLPATHS_CONFIRMATION
+      value: "/auth/v1/verify"
+    - name: GOTRUE_MAILER_URLPATHS_RECOVERY
+      value: "/auth/v1/verify"
+    - name: GOTRUE_MAILER_URLPATHS_EMAIL_CHANGE
+      value: "/auth/v1/verify"
+    ## Uncomment to enable custom access token hook. Please see: https://supabase.com/docs/guides/auth/auth-hooks
+    ## for full list of hooks and additional details about custom_access_token_hook
+    # - name: GOTRUE_HOOK_CUSTOM_ACCESS_TOKEN_ENABLED
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: <secret-name>
+    #       key: <secret-key>
+    # - name: GOTRUE_HOOK_CUSTOM_ACCESS_TOKEN_URI
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: <secret-name>
+    #       key: <secret-key>
+    # - name: GOTRUE_HOOK_CUSTOM_ACCESS_TOKEN_SECRETS
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: <secret-name>
+    #       key: <secret-key>
+    # - name: GOTRUE_HOOK_MFA_VERIFICATION_ATTEMPT_ENABLED
+    #   value: "true"
+    # - name: GOTRUE_HOOK_MFA_VERIFICATION_ATTEMPT_URI
+    #   value: "pg-functions://postgres/public/mfa_verification_attempt"
+    # - name: GOTRUE_HOOK_PASSWORD_VERIFICATION_ATTEMPT_ENABLED
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: <secret-name>
+    #       key: <secret-key>
+    # - name: GOTRUE_HOOK_PASSWORD_VERIFICATION_ATTEMPT_URI
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: <secret-name>
+    #       key: <secret-key>
+    # - name: GOTRUE_HOOK_SEND_SMS_ENABLED
+    #   value: "false"
+    # - name: GOTRUE_HOOK_SEND_SMS_URI
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: <secret-name>
+    #       key: <secret-key>
+    # - name: GOTRUE_HOOK_SEND_SMS_SECRETS
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: <secret-name>
+    #       key: <secret-key>
+    # - name: GOTRUE_HOOK_SEND_EMAIL_ENABLED
+    #   value: "false"
+    # - name: GOTRUE_HOOK_SEND_EMAIL_URI
+    #   value: "http://host.docker.internal:54321/functions/v1/email_sender"
+    # - name: GOTRUE_HOOK_SEND_EMAIL_SECRETS
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: <secret-name>
+    #       key: <secret-key>
+
+  db:
+    - name: POSTGRES_HOST
+      value: /var/run/postgresql
+    - name: PGPORT
+      value: "5432"
+    - name: POSTGRES_PORT
+      value: "5432"
+    - name: JWT_EXP
+      value: 3600
+    # - name: POSTGRES_HOST_AUTH_METHOD
+    #   value: md5
+    ## Enable SSL for postgres by specifying paths for mounted certificate key pair
+    # - name: POSTGRES_SSL_CERT
+    #   value: /path/to/ssl/server.crt
+    # - name: POSTGRES_SSL_KEY
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: <secret-name>
+    #       key: <secret-key>
+
+  functions:
+    - name: VERIFY_JWT
+      value: false
+
+  imgproxy:
+    - name: IMGPROXY_BIND
+      value: ":5001"
+    - name: IMGPROXY_LOCAL_FILESYSTEM_ROOT
+      value: /
+    - name: IMGPROXY_USE_ETAG
+      value: "true"
+    - name: IMGPROXY_ENABLE_WEBP_DETECTION
+      value: "true"
+
+  kong:
+    - name: KONG_DATABASE
+      value: "off"
+    - name: KONG_DECLARATIVE_CONFIG
+      value: /usr/local/kong/kong.yml
+    ## https://github.com/supabase/cli/issues/14
+    - name: KONG_DNS_ORDER
+      value: LAST,A,CNAME
+    - name: KONG_PLUGINS
+      value: request-transformer,cors,key-auth,acl,basic-auth,post-function
+    - name: KONG_NGINX_PROXY_PROXY_BUFFER_SIZE
+      value: 160k
+    - name: KONG_NGINX_PROXY_PROXY_BUFFERS
+      value: 64 160k
+    - name: KONG_LOG_LEVEL
+      value: warn
+
+    # Please see: https://github.com/supabase-community/supabase-kubernetes/issues/187
+    - name: KONG_NGINX_WORKER_PROCESSES
+      value: "2"
+
+  meta:
+    - name: DB_DRIVER
+      value: postgres
+    - name: PG_META_PORT
+      value: "8080"
+
+  minio:
+    []
+
+  realtime:
+    - name: DB_USER
+      value: supabase_admin
+    ## Set to true to enforce TLS connections to Postgres
+    - name: DB_SSL
+      value: false
+    - name: PORT
+      value: "4000"
+    - name: FLY_ALLOC_ID
+      value: fly123
+    - name: FLY_APP_NAME
+      value: realtime
+    - name: ENABLE_TAILSCALE
+      value: "false"
+    - name: DB_AFTER_CONNECT_QUERY
+      value: "SET search_path TO _realtime"
+    - name: ERL_AFLAGS
+      value: -proto_dist inet_tcp
+    - name: DNS_NODES
+      value: "''"
+    - name: RLIMIT_NOFILE
+      value: "10000"
+    - name: APP_NAME
+      value: realtime
+    - name: SEED_SELF_HOST
+      value: true
+    - name: RUN_JANITOR
+      value: true
+
+  rest:
+    - name: PGRST_DB_SCHEMAS
+      value: public,storage,graphql_public
+    - name: PGRST_DB_ANON_ROLE
+      value: anon
+    - name: PGRST_DB_USE_LEGACY_GUCS
+      value: false
+    - name: PGRST_APP_SETTINGS_JWT_EXP
+      value: 3600
+
+  storage:
+    - name: REQUEST_ALLOW_X_FORWARDED_PATH
+      value: "true"
+    - name: FILE_SIZE_LIMIT
+      value: "52428800"
+    - name: FILE_STORAGE_BACKEND_PATH
+      value: /var/lib/storage
+    - name: TENANT_ID
+      value: stub
+    - name: REGION
+      value: stub
+    - name: GLOBAL_S3_BUCKET
+      value: stub
+    - name: ENABLE_IMAGE_TRANSFORMATION
+      value: "true"
+
+  studio:
+    - name: HOSTNAME
+      value: "::"
+    - name: STUDIO_PORT
+      value: "3000"
+    - name: DEFAULT_ORGANIZATION_NAME
+      value: Default Organization
+    - name: DEFAULT_PROJECT_NAME
+      value: Default Project
+    - name: SUPABASE_PUBLIC_URL
+      value: http://supabase.local
+    ## Set value to bigquery to use Big Query backend for analytics (postgres or bigquery)
+    - name: NEXT_ANALYTICS_BACKEND_PROVIDER
+      value: postgres
+
+  vector:
+    []
+
+persistence:
+  db:
+    enabled: true
+    storageClassName: ""
+    # existingClaim: ""
+    annotations: {}
+    size: 5Gi
+    accessModes:
+      - ReadWriteOnce
+
+  functions:
+    enabled: true
+    storageClassName: ""
+    # existingClaim: ""
+    annotations: {}
+    size: 1Gi
+    accessModes:
+      - ReadWriteOnce
+
+  imgproxy:
+    enabled: true
+    storageClassName: ""
+    # existingClaim: ""
+    annotations: {}
+    size: 1Gi
+    accessModes:
+      - ReadWriteOnce
+
+  minio:
+    enabled: true
+    storageClassName: ""
+    # existingClaim: ""
+    annotations: {}
+    size: 1Gi
+    accessModes:
+      - ReadWriteOnce
+
+  snippets:
+    enabled: true
+    storageClassName: ""
+    # existingClaim: ""
+    annotations: {}
+    size: 1Gi
+    accessModes:
+      - ReadWriteOnce
+
+  storage:
+    enabled: true
+    storageClassName: ""
+    # existingClaim: ""
+    annotations: {}
+    size: 1Gi
+    accessModes:
+      - ReadWriteOnce
+
+  deno:
+    enabled: true
+    storageClassName: ""
+    # existingClaim: ""
+    annotations: {}
+    size: 1Gi
+    accessModes:
+      - ReadWriteOnce
+
+  pgsodium:
+    enabled: true
+    storageClassName: ""
+    # existingClaim: ""
+    annotations: {}
+    size: 100Mi
+    accessModes:
+      - ReadWriteOnce
+
+service:
+  analytics:
+    type: ClusterIP
+    port: 4000
+    targetPort: 4000
+    protocol: TCP
+    annotations: {}
+    labels: {}
+    portName: http
+
+  auth:
+    type: ClusterIP
+    port: 9999
+    targetPort: 9999
+    protocol: TCP
+    annotations: {}
+    labels: {}
+    portName: http
+
+  db:
+    type: ClusterIP
+    port: 5432
+    targetPort: 5432
+    protocol: TCP
+    annotations: {}
+    labels: {}
+    portName: http
+
+  functions:
+    type: ClusterIP
+    port: 9000
+    targetPort: 9000
+    protocol: TCP
+    annotations: {}
+    labels: {}
+    portName: http
+
+  imgproxy:
+    type: ClusterIP
+    port: 5001
+    targetPort: 5001
+    protocol: TCP
+    annotations: {}
+    labels: {}
+    portName: http
+
+  kong:
+    type: ClusterIP
+    port: 8000
+    targetPort: 8000
+    protocol: TCP
+    annotations: {}
+    labels: {}
+    portName: http
+
+  meta:
+    type: ClusterIP
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+    annotations: {}
+    labels: {}
+    portName: http
+
+  minio:
+    type: ClusterIP
+    port: 9000
+    targetPort: 9000
+    protocol: TCP
+    annotations: {}
+    labels: {}
+    portName: http
+
+  realtime:
+    type: ClusterIP
+    port: 4000
+    targetPort: 4000
+    protocol: TCP
+    annotations: {}
+    labels: {}
+    portName: http
+
+  rest:
+    type: ClusterIP
+    port: 3000
+    targetPort: 3000
+    protocol: TCP
+    annotations: {}
+    labels: {}
+    portName: http
+
+  storage:
+    type: ClusterIP
+    port: 5000
+    targetPort: 5000
+    protocol: TCP
+    annotations: {}
+    labels: {}
+    portName: http
+
+  studio:
+    type: ClusterIP
+    port: 3000
+    targetPort: 3000
+    protocol: TCP
+    annotations: {}
+    labels: {}
+    portName: http
+
+  vector:
+    type: ClusterIP
+    port: 9001
+    targetPort: 9001
+    protocol: TCP
+    annotations: {}
+    labels: {}
+    portName: http
+
+# Prometheus Operator ServiceMonitor resources for scraping component metrics.
+# Requires the Prometheus Operator CRDs (monitoring.coreos.com/v1) to be installed in the cluster.
+serviceMonitor:
+  # Master switch. When false, no ServiceMonitor is created regardless of the per-component settings below.
+  enabled: false
+  # Namespace to create the ServiceMonitor resources in. Defaults to the release namespace when empty.
+  namespace: ""
+  # Extra labels added to every ServiceMonitor (e.g. to match your Prometheus `serviceMonitorSelector`).
+  labels: {}
+  # Extra annotations added to every ServiceMonitor.
+  annotations: {}
+  # Default scrape interval. Overridable per component.
+  interval: 30s
+  # Default scrape timeout. Overridable per component.
+  scrapeTimeout: 10s
+  # Default Service port name to scrape. The chart Services expose the "http" port. Overridable per component.
+  port: http
+  # Default metrics path. Overridable per component.
+  path: /metrics
+  # Default scheme, http or https. Overridable per component.
+  scheme: http
+  # Default TLS configuration for the endpoint. Overridable per component.
+  tlsConfig: {}
+  # Default relabelings applied before scraping. Overridable per component.
+  relabelings: []
+  # Default metric relabelings applied after scraping. Overridable per component.
+  metricRelabelings: []
+  # Per-component configuration. A ServiceMonitor is created only for a component that is deployed
+  # (`deployment.<component>.enabled`) AND has `enabled: true` here. Any default above (interval,
+  # scrapeTimeout, port, path, scheme, tlsConfig, relabelings, metricRelabelings) can be overridden
+  # inside a component block. Components that natively expose Prometheus metrics on their HTTP port
+  # (e.g. realtime, storage) work out of the box; others may require enabling metrics in their own
+  # configuration first.
+  components:
+    analytics:
+      enabled: false
+    auth:
+      enabled: false
+    db:
+      enabled: false
+    functions:
+      enabled: false
+    imgproxy:
+      enabled: false
+    kong:
+      enabled: false
+    meta:
+      enabled: false
+    minio:
+      enabled: false
+    realtime:
+      enabled: false
+    rest:
+      enabled: false
+    storage:
+      enabled: false
+    studio:
+      enabled: false
+    vector:
+      enabled: false
+
+autoscaling:
+  analytics:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  auth:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  db:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  functions:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  imgproxy:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  kong:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  meta:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  minio:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  realtime:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  rest:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  storage:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  studio:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  vector:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    # cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    # kubernetes.io/tls-acme: "true"
+  tls: []
+    ## Define TLS secret for SSL termination.
+    ## This section can be left blank if using cluster certificate manager.
+    ## Otherwise, setting this in tandem with certificate manager will overwrite the secret name.
+    # - secretName: example-com-tls
+    #   hosts:
+    #     - example.com
+  hosts:
+    - host: supabase.local
+      paths:
+        - path: /
+          pathType: Prefix
+
+serviceAccount:
+  analytics:
+    create: true
+    annotations: {}
+    name: ""
+
+  auth:
+    create: true
+    annotations: {}
+    name: ""
+
+  db:
+    create: true
+    annotations: {}
+    name: ""
+
+  functions:
+    create: true
+    annotations: {}
+    name: ""
+
+  imgproxy:
+    create: true
+    annotations: {}
+    name: ""
+
+  kong:
+    create: true
+    annotations: {}
+    name: ""
+
+  meta:
+    create: true
+    annotations: {}
+    name: ""
+
+  minio:
+    create: true
+    annotations: {}
+    name: ""
+
+  realtime:
+    create: true
+    annotations: {}
+    name: ""
+
+  rest:
+    create: true
+    annotations: {}
+    name: ""
+
+  storage:
+    create: true
+    annotations: {}
+    name: ""
+
+  studio:
+    create: true
+    annotations: {}
+    name: ""
+
+  vector:
+    create: true
+    annotations: {}
+    name: ""
+
+networkPolicy:
+  db:
+    enabled: false
+    # example.values.yaml
+    # ingressRules:
+    #   - name: allow-supabase-internal
+    #     from:
+    #       podSelector:
+    #         matchLabels:
+    #           app.kubernetes.io/instance: supabase
+    #   - name: allow-analytics-team
+    #     from:
+    #       namespaceSelector:
+    #         matchLabels:
+    #           team: analytics
+    #       podSelector:
+    #         matchLabels:
+    #           role: analyst-tool
+
+migration:
+  # example.sql: |
+  #   \set pguser `echo "$POSTGRES_USER"`
+
+  #   -- Create schema
+  #   create schema if not exists app;
+  #   alter schema app owner to :pguser;
+
+  #   -- Create example table
+  #   create table if not exists app.items (
+  #     id   serial primary key,
+  #     name text not null
+  #   );
+
+  #   -- Set table owner
+  #   alter table app.items owner to :pguser;
+
+bigQuery:
+  enabled: false
+  projectId: google-project-id
+  projectNumber: google-project-number
+

@@ -1,0 +1,381 @@
+===== SUPABASE CNPG BOOTSTRAP =====
+===== INIT SCRIPTS =====
+RUN INIT: 00000000000000-initial-schema.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+CREATE PUBLICATION
+ALTER ROLE
+CREATE ROLE
+CREATE ROLE
+GRANT ROLE
+GRANT
+CREATE ROLE
+GRANT ROLE
+CREATE SCHEMA
+CREATE EXTENSION
+CREATE EXTENSION
+CREATE ROLE
+CREATE ROLE
+CREATE ROLE
+CREATE ROLE
+GRANT ROLE
+GRANT ROLE
+GRANT ROLE
+GRANT ROLE
+GRANT
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+GRANT
+ALTER ROLE
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+ALTER ROLE
+ALTER ROLE
+RUN INIT: 00000000000001-auth-schema.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+CREATE SCHEMA
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+COMMENT
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+COMMENT
+CREATE TABLE
+COMMENT
+CREATE TABLE
+CREATE INDEX
+COMMENT
+CREATE TABLE
+COMMENT
+INSERT 0 7
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+GRANT
+CREATE ROLE
+GRANT
+GRANT
+GRANT
+ALTER ROLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+RUN INIT: 00000000000002-storage-schema.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+CREATE SCHEMA
+CREATE ROLE
+ALTER ROLE
+GRANT
+DO
+RUN INIT: 00000000000003-post-setup.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+ALTER ROLE
+ALTER ROLE
+CREATE FUNCTION
+CREATE EVENT TRIGGER
+COMMENT
+CREATE FUNCTION
+COMMENT
+DO
+CREATE ROLE
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+DO
+RUN INIT: 00-schema.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+CREATE ROLE
+REVOKE
+CREATE SCHEMA
+CREATE FUNCTION
+REVOKE
+GRANT
+===== MIGRATIONS =====
+RUN MIGRATION: 00-extension.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+NOTICE:  schema "extensions" already exists, skipping
+CREATE SCHEMA
+CREATE EXTENSION
+RUN MIGRATION: 10000000000000_demote-postgres.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+DO
+RUN MIGRATION: 20211115181400_update-auth-permissions.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+GRANT
+GRANT
+GRANT
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+GRANT
+GRANT
+GRANT
+GRANT
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+RUN MIGRATION: 20211118015519_create-realtime-schema.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+CREATE SCHEMA
+RUN MIGRATION: 20211122051245_update-realtime-permissions.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+GRANT
+GRANT
+GRANT
+GRANT
+RUN MIGRATION: 20211124212715_update-auth-owner.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DO
+DO
+DO
+RUN MIGRATION: 20211130151719_update-realtime-permissions.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+RUN MIGRATION: 20220118070449_enable-safeupdate-postgrest.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+ALTER ROLE
+RUN MIGRATION: 20220126121436_finer-postgrest-triggers.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+NOTICE:  event trigger "api_restart" does not exist, skipping
+NOTICE:  function extensions.notify_api_restart() does not exist, skipping
+DROP EVENT TRIGGER
+DROP FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+NOTICE:  event trigger "pgrst_ddl_watch" does not exist, skipping
+DROP EVENT TRIGGER
+NOTICE:  event trigger "pgrst_drop_watch" does not exist, skipping
+CREATE EVENT TRIGGER
+DROP EVENT TRIGGER
+CREATE EVENT TRIGGER
+RUN MIGRATION: 20220224211803_fix-postgrest-supautils.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DO
+RUN MIGRATION: 20220317095840_pg_graphql.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+CREATE SCHEMA
+NOTICE:  function graphql_public.graphql(text,text,jsonb) does not exist, skipping
+DROP FUNCTION
+CREATE FUNCTION
+GRANT
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+CREATE FUNCTION
+NOTICE:  event trigger "issue_pg_graphql_access" does not exist, skipping
+DROP EVENT TRIGGER
+CREATE EVENT TRIGGER
+COMMENT
+NOTICE:  event trigger "issue_graphql_placeholder" does not exist, skipping
+CREATE FUNCTION
+DROP EVENT TRIGGER
+CREATE EVENT TRIGGER
+COMMENT
+RUN MIGRATION: 20220321174452_fix-postgrest-alter-type-event-trigger.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DROP EVENT TRIGGER
+NOTICE:  event trigger "api_restart" does not exist, skipping
+NOTICE:  function extensions.notify_api_restart() does not exist, skipping
+DROP FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+DROP EVENT TRIGGER
+CREATE EVENT TRIGGER
+DROP EVENT TRIGGER
+CREATE EVENT TRIGGER
+RUN MIGRATION: 20220322085208_gotrue-session-limit.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+ALTER ROLE
+RUN MIGRATION: 20220404205710_pg_graphql-on-by-default.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+CREATE FUNCTION
+CREATE FUNCTION
+NOTICE:  extension "pg_graphql" does not exist, skipping
+CREATE FUNCTION
+DROP EXTENSION
+DO
+RUN MIGRATION: 20220609081115_grant-supabase-auth-admin-and-supabase-storage-admin-to-postgres.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+GRANT ROLE
+RUN MIGRATION: 20220613123923_pg_graphql-pg-dump-perms.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+CREATE FUNCTION
+DROP EXTENSION
+DO
+RUN MIGRATION: 20220713082019_pg_cron-pg_net-temp-perms-fix.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DO
+DO
+RUN MIGRATION: 20221028101028_set_authenticator_timeout.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+ALTER ROLE
+RUN MIGRATION: 20221103090837_revoke_admin.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+REVOKE ROLE
+RUN MIGRATION: 20221207154255_create_pgsodium_and_vault.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DO
+RUN MIGRATION: 20230201083204_grant_auth_roles_to_postgres.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+GRANT ROLE
+RUN MIGRATION: 20230224042246_grant_extensions_perms_for_postgres.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+GRANT
+GRANT
+GRANT
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+RUN MIGRATION: 20230306081037_grant_pg_monitor_to_postgres.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+GRANT ROLE
+RUN MIGRATION: 20230327032006_grant_auth_roles_to_supabase_storage_admin.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+GRANT ROLE
+RUN MIGRATION: 20230529180330_alter_api_roles_for_inherit.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+ALTER ROLE
+ALTER ROLE
+ALTER ROLE
+DO
+RUN MIGRATION: 20231013070755_grant_authenticator_to_supabase_storage_admin.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+GRANT ROLE
+REVOKE ROLE
+RUN MIGRATION: 20231017062225_grant_pg_graphql_permissions_for_custom_roles.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+CREATE FUNCTION
+DROP EXTENSION
+DO
+RUN MIGRATION: 20231020085357_revoke_writes_on_cron_job_from_postgres.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DO
+CREATE FUNCTION
+DROP EVENT TRIGGER
+ALTER FUNCTION
+CREATE EVENT TRIGGER
+RUN MIGRATION: 20231130133139_set_lock_timeout_to_authenticator_role.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+ALTER ROLE
+RUN MIGRATION: 20240124080435_alter_lo_export_lo_import_owner.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+RUN MIGRATION: 20240606060239_grant_predefined_roles_to_postgres.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+GRANT ROLE
+RUN MIGRATION: 20241031003909_create_orioledb.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DO
+RUN MIGRATION: 20241215003910_backfill_pgmq_metadata.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DO
+DO
+RUN MIGRATION: 20250205060043_disable_log_statement_on_internal_roles.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+ALTER ROLE
+ALTER ROLE
+ALTER ROLE
+RUN MIGRATION: 20250205144616_move_orioledb_to_extensions_schema.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DO
+RUN MIGRATION: 20250218031949_pgsodium_mask_role.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DO
+RUN MIGRATION: 20250220051611_pg_net_perms_fix.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+CREATE FUNCTION
+DO
+RUN MIGRATION: 20250312095419_pgbouncer_ownership.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+ALTER FUNCTION
+GRANT
+RUN MIGRATION: 20250402065937_alter_internal_event_triggers_owner_to_supabase_admin.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DROP EVENT TRIGGER
+ALTER FUNCTION
+CREATE EVENT TRIGGER
+RUN MIGRATION: 20250402093753_grant_subscription_to_postgres_16_and_above.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DO
+RUN MIGRATION: 20250417190610_update_pgbouncer_get_auth.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+CREATE FUNCTION
+GRANT
+RUN MIGRATION: 20250421084701_revoke_admin_roles_from_postgres.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+REVOKE ROLE
+DO
+DO
+REVOKE ROLE
+REVOKE
+DO
+RUN MIGRATION: 20250605172253_grant_with_admin_to_postgres_16_and_above.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DO
+RUN MIGRATION: 20250623125453_tmp_grant_storage_tables_to_postgres_with_grant_option.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DO
+RUN MIGRATION: 20250709135250_grant_storage_schema_to_postgres_with_grant_option.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DO
+RUN MIGRATION: 20250710151649_supabase_read_only_user_default_transaction_read_only.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+ALTER ROLE
+RUN MIGRATION: 20251001204436_predefined_role_grants.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+GRANT ROLE
+DO
+RUN MIGRATION: 20251105172723_grant_pg_reload_conf_to_postgres.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+GRANT
+RUN MIGRATION: 20251121132723_correct_search_path_pgbouncer.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+CREATE FUNCTION
+REVOKE
+REVOKE
+GRANT
+RUN MIGRATION: 20260211120934_supabase_privileged_role.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DO
+RUN MIGRATION: 20260413000000_fix-authenticator-session-preload-libraries.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+ALTER ROLE
+RUN MIGRATION: 20260421000000_pg_graphql-off-by-default.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+DROP EXTENSION
+RUN MIGRATION: 20260421000001_rescope_pg_graphql_access_trigger.sql
+Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+CREATE FUNCTION
+DROP EVENT TRIGGER
+CREATE EVENT TRIGGER
+===== BOOTSTRAP COMPLETE =====

@@ -1,0 +1,17 @@
+migrations/20251121132723_correct_search_path_pgbouncer.sql:24:revoke execute on function pgbouncer.get_auth(text) from postgres;
+migrations/20220713082019_pg_cron-pg_net-temp-perms-fix.sql:55:      CREATE USER supabase_functions_admin NOINHERIT CREATEROLE LOGIN NOREPLICATION;
+migrations/20250421084701_revoke_admin_roles_from_postgres.sql:2:revoke supabase_storage_admin from postgres;
+migrations/20250421084701_revoke_admin_roles_from_postgres.sql:6:    revoke create on schema storage from postgres;
+migrations/20250421084701_revoke_admin_roles_from_postgres.sql:16:revoke supabase_auth_admin from postgres;
+migrations/20250421084701_revoke_admin_roles_from_postgres.sql:17:revoke create on schema auth from postgres;
+migrations/20250402093753_grant_subscription_to_postgres_16_and_above.sql:9:    GRANT pg_create_subscription TO postgres;
+migrations/20250220051611_pg_net_perms_fix.sql:21:      CREATE USER supabase_functions_admin NOINHERIT CREATEROLE LOGIN NOREPLICATION;
+migrations/10000000000000_demote-postgres.sql:22:ALTER ROLE postgres NOSUPERUSER CREATEDB CREATEROLE LOGIN REPLICATION BYPASSRLS;
+migrations/20251001204436_predefined_role_grants.sql:11:    grant pg_create_subscription to postgres with admin option;
+migrations/20231020085357_revoke_writes_on_cron_job_from_postgres.sql:5:    revoke all on table cron.job from postgres;
+migrations/20231020085357_revoke_writes_on_cron_job_from_postgres.sql:36:    revoke all on table cron.job from postgres;
+init-scripts/00000000000001-auth-schema.sql:112:CREATE USER supabase_auth_admin NOINHERIT CREATEROLE LOGIN NOREPLICATION;
+init-scripts/00000000000002-storage-schema.sql:5:CREATE USER supabase_storage_admin NOINHERIT CREATEROLE LOGIN NOREPLICATION;
+init-scripts/00000000000003-post-setup.sql:4:ALTER ROLE postgres SET search_path TO "\$user",public,extensions;
+init-scripts/00000000000003-post-setup.sql:66:      CREATE USER supabase_functions_admin NOINHERIT CREATEROLE LOGIN NOREPLICATION;
+init-scripts/00000000000003-post-setup.sql:104:CREATE ROLE dashboard_user NOSUPERUSER CREATEDB CREATEROLE REPLICATION;

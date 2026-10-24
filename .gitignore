@@ -1,0 +1,10 @@
+k8s-recovery-*/
+# 숨김 폴더/파일 전체 제외 (.vscode-server, .ssh, .aws, .kube, .git-credentials, .bash_history 등)
+.*
+!.gitignore
+k8s-recovery-*/
+*.pem
+*.key
+*.tfstate*
+.terraform/
+node_modules/

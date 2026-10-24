@@ -1,0 +1,62 @@
+===== 1. POD / IMAGE =====
+Pod: supabase-dev-supabase-db-0
+Node: pantry-dev-postgres
+
+--- Containers ---
+supabase-db -> supabase/postgres:17.6.1.136
+
+--- Init Containers ---
+init-pgsodium -> supabase/postgres:17.6.1.136
+init-db -> supabase/postgres:17.6.1.136
+
+===== 2. VOLUMES =====
+initdb-scripts-data | secret= | configmap= | pvc=
+custom-init-scripts | secret= | configmap=supabase-dev-supabase-db-initdb | pvc=
+custom-migrations | secret= | configmap=supabase-dev-supabase-db-migrations | pvc=
+pgsodium | secret= | configmap= | pvc=supabase-dev-pgsodium
+postgres-volume | secret= | configmap= | pvc=supabase-dev-db
+kube-api-access-txqdr | secret= | configmap= | pvc=
+
+--- DB Mounts ---
+initdb-scripts-data -> /docker-entrypoint-initdb.d
+pgsodium -> /etc/postgresql-custom
+postgres-volume -> /var/lib/postgresql/data
+kube-api-access-txqdr -> /var/run/secrets/kubernetes.io/serviceaccount
+
+--- Init Container Mounts ---
+[init-pgsodium]
+pgsodium -> /mnt/pgsodium
+kube-api-access-txqdr -> /var/run/secrets/kubernetes.io/serviceaccount
+[init-db]
+custom-init-scripts -> /custom-init-scripts
+custom-migrations -> /custom-migrations
+initdb-scripts-data -> /initdb.d
+kube-api-access-txqdr -> /var/run/secrets/kubernetes.io/serviceaccount
+
+===== 3. SECRET / CONFIGMAP NAMES ONLY =====
+NAME                                        TYPE                 DATA   AGE
+secret/sh.helm.release.v1.supabase-dev.v1   helm.sh/release.v1   1      4d22h
+secret/supabase-core                        Opaque               5      4d23h
+secret/supabase-dev-analytics               Opaque               2      4d22h
+secret/supabase-dev-apikey                  Opaque               6      4d22h
+secret/supabase-dev-dashboard               Opaque               3      4d22h
+secret/supabase-dev-meta                    Opaque               1      4d22h
+secret/supabase-dev-minio                   Opaque               2      4d22h
+secret/supabase-dev-realtime                Opaque               2      4d22h
+secret/supabase-dev-s3                      Opaque               2      4d22h
+secret/supabase-dev-smtp                    Opaque               2      4d22h
+
+NAME                                            DATA   AGE
+configmap/kube-root-ca.crt                      1      5d20h
+configmap/supabase-dev-supabase-db-initdb       7      4d22h
+configmap/supabase-dev-supabase-db-migrations   0      4d22h
+
+===== 4. POSTGRES SETTINGS =====
+
+===== 5. INSTALLED EXTENSIONS =====
+
+===== 6. SUPABASE ROLES =====
+
+===== 7. IMPORTANT SCHEMAS =====
+
+===== 8. INIT / CUSTOM FILE NAMES =====

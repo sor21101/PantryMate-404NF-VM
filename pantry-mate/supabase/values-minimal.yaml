@@ -1,0 +1,104 @@
+secret:
+  jwt:
+    secretRef: supabase-core
+    secretRefKey:
+      secret: jwtSecret
+      anonKey: anonKey
+      serviceKey: serviceKey
+
+  db:
+    database: postgres
+    secretRef: supabase-core
+    secretRefKey:
+      password: dbPassword
+
+deployment:
+  analytics:
+    enabled: false
+
+  auth:
+    enabled: true
+    nodeSelector:
+      role: postgres
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+
+  db:
+    enabled: true
+    nodeSelector:
+      role: postgres
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+      limits:
+        cpu: "1"
+        memory: 1536Mi
+
+  functions:
+    enabled: false
+
+  imgproxy:
+    enabled: false
+
+  kong:
+    enabled: false
+
+  meta:
+    enabled: false
+
+  minio:
+    enabled: false
+
+  realtime:
+    enabled: false
+
+  rest:
+    enabled: false
+
+  storage:
+    enabled: false
+
+  studio:
+    enabled: false
+
+  vector:
+    enabled: false
+
+persistence:
+  db:
+    enabled: true
+    storageClassName: local-path
+    size: 10Gi
+    accessModes:
+      - ReadWriteOnce
+
+  functions:
+    enabled: false
+
+  imgproxy:
+    enabled: false
+
+  minio:
+    enabled: false
+
+  snippets:
+    enabled: false
+
+  storage:
+    enabled: false
+
+  deno:
+    enabled: false
+
+  pgsodium:
+    enabled: true
+    storageClassName: local-path
+    size: 100Mi
+    accessModes:
+      - ReadWriteOnce

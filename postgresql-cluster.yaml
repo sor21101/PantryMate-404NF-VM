@@ -1,0 +1,29 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+
+metadata:
+  name: postgresql
+  namespace: database
+
+spec:
+  instances: 2
+
+  imageName: ghcr.io/cloudnative-pg/postgresql:17
+
+  bootstrap:
+    initdb:
+      database: pantry
+      owner: pantry_app
+      secret:
+        name: postgresql-app
+
+  storage:
+    storageClass: local-path
+    size: 20Gi
+
+  affinity:
+    nodeSelector:
+      db-ha: enabled
+    podAntiAffinityType: required
+
+  enablePDB: true

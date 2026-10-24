@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pgsodium-getkey
+  namespace: database
+data:
+  pgsodium_getkey.sh: |
+    #!/bin/sh
+    set -eu
+    KEY_FILE=/projected/postgresql-custom/pgsodium_root.key
+
+    if [ ! -f "$KEY_FILE" ]; then
+      echo "pgsodium root key not found" >&2
+      exit 1
+    fi
+
+    cat "$KEY_FILE"
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: supabase-postgres
+  namespace: database
+
+spec:
+  instances: 1
+
+  imageName: supabase/postgres:17.6.1.136
+  imagePullPolicy: IfNotPresent
+
+  # 이 이미지에서 직접 확인한 실제 UID/GID
+  postgresUID: 100
+  postgresGID: 101
+
+  enableSuperuserAccess: true
+
+  superuserSecret:
+    name: supabase-postgres-superuser
+
+  managed:
+    roles:
+      - name: supabase_admin
+        ensure: present
+        login: true
+        superuser: true
+        createdb: true
+        createrole: true
+        replication: true
+        bypassrls: true
+        passwordSecret:
+          name: supabase-admin
+
+  projectedVolumeTemplate:
+    sources:
+      - secret:
+          name: supabase-pgsodium
+          items:
+            - key: pgsodium_root.key
+              path: postgresql-custom/pgsodium_root.key
+
+      - configMap:
+          name: pgsodium-getkey
+          items:
+            - key: pgsodium_getkey.sh
+              path: postgresql-custom/pgsodium_getkey.sh
+              mode: 0555
+
+  affinity:
+    nodeSelector:
+      role: postgres
+
+  postgresql:
+    parameters:
+      pgsodium.getkey_script: /projected/postgresql-custom/pgsodium_getkey.sh
+      vault.getkey_script: /projected/postgresql-custom/pgsodium_getkey.sh
+      session_preload_libraries: supautils
+      cron.database_name: postgres
+      pg_net.database_name: postgres
+
+    shared_preload_libraries:
+      - pg_stat_statements
+      - pgaudit
+      - plpgsql
+      - plpgsql_check
+      - pg_cron
+      - pg_net
+      - pgsodium
+      - auto_explain
+      - pg_tle
+      - plan_filter
+      - supabase_vault
+
+  storage:
+    storageClass: local-path
+    size: 20Gi
+
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      cpu: "2"
+      memory: 4Gi

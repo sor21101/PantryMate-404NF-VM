@@ -1,0 +1,19 @@
+secret:
+  jwt:
+    secretRef: supabase-jwt
+    secretRefKey:
+      anonKey: anonKey
+      serviceKey: serviceKey
+      secret: secret
+
+  db:
+    secretRef: supabase-external-db
+    secretRefKey:
+      host: host
+      port: port
+      password: password
+      database: database
+
+deployment:
+  db:
+    enabled: false

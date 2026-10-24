@@ -1,0 +1,23 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: supabase-cnpg-test
+  namespace: database
+
+spec:
+  instances: 1
+
+  imageName: supabase/postgres:17.6.1.136
+
+  postgresUID: 100
+  postgresGID: 101
+
+  enableSuperuserAccess: true
+
+  affinity:
+    nodeSelector:
+      role: postgres
+
+  storage:
+    storageClass: local-path
+    size: 2Gi

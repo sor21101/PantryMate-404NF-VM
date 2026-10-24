@@ -1,0 +1,196 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"postgresql.cnpg.io/v1","kind":"Cluster","metadata":{"annotations":{},"name":"postgresql","namespace":"database"},"spec":{"affinity":{"nodeSelector":{"db-ha":"enabled"},"podAntiAffinityType":"required"},"bootstrap":{"initdb":{"database":"pantry","owner":"pantry_app","secret":{"name":"postgresql-app"}}},"enablePDB":true,"imageName":"ghcr.io/cloudnative-pg/postgresql:17","instances":2,"storage":{"size":"20Gi","storageClass":"local-path"}}}
+  creationTimestamp: "2026-09-16T12:07:27Z"
+  generation: 4
+  name: postgresql
+  namespace: database
+  resourceVersion: "1209695"
+  uid: c9f0252f-045d-4df1-bbd8-92de04146ab9
+spec:
+  affinity:
+    nodeSelector:
+      db-ha: enabled
+    podAntiAffinityType: required
+  bootstrap:
+    initdb:
+      database: pantry
+      encoding: UTF8
+      localeCType: C
+      localeCollate: C
+      owner: pantry_app
+      secret:
+        name: postgresql-app
+  enablePDB: true
+  enableSuperuserAccess: false
+  failoverDelay: 0
+  imageName: ghcr.io/cloudnative-pg/postgresql:17
+  instances: 2
+  logLevel: info
+  maxSyncReplicas: 0
+  minSyncReplicas: 0
+  monitoring:
+    customQueriesConfigMap:
+    - key: queries
+      name: cnpg-default-monitoring
+    disableDefaultQueries: false
+    enablePodMonitor: false
+  postgresGID: 26
+  postgresUID: 26
+  postgresql:
+    parameters:
+      archive_mode: "on"
+      archive_timeout: 5min
+      dynamic_shared_memory_type: posix
+      full_page_writes: "on"
+      log_destination: csvlog
+      log_directory: /controller/log
+      log_filename: postgres
+      log_rotation_age: "0"
+      log_rotation_size: "0"
+      log_truncate_on_rotation: "false"
+      logging_collector: "on"
+      max_connections: "300"
+      max_parallel_workers: "32"
+      max_replication_slots: "32"
+      max_worker_processes: "32"
+      shared_memory_type: mmap
+      shared_preload_libraries: ""
+      ssl_max_protocol_version: TLSv1.3
+      ssl_min_protocol_version: TLSv1.3
+      wal_keep_size: 512MB
+      wal_level: logical
+      wal_log_hints: "on"
+      wal_receiver_timeout: 5s
+      wal_sender_timeout: 5s
+    syncReplicaElectionConstraint:
+      enabled: false
+  primaryUpdateMethod: restart
+  primaryUpdateStrategy: unsupervised
+  probes:
+    liveness:
+      isolationCheck:
+        connectionTimeout: 1000
+        enabled: true
+        requestTimeout: 1000
+  replicationSlots:
+    highAvailability:
+      enabled: true
+      slotPrefix: _cnpg_
+    synchronizeReplicas:
+      enabled: true
+    updateInterval: 30
+  resources: {}
+  smartShutdownTimeout: 180
+  startDelay: 3600
+  stopDelay: 1800
+  storage:
+    resizeInUseVolumes: true
+    size: 20Gi
+    storageClass: local-path
+  switchoverDelay: 3600
+status:
+  availableArchitectures:
+  - goArch: amd64
+    hash: 495c8f8b99d3a01b461bcffa8f9ef3cba7eb381e2b19f7af48b81c42270f0759
+  - goArch: arm64
+    hash: 101495327b17038a7f67e48a66f8be7bbcad798b1601a41fde435c22beeebd91
+  certificates:
+    clientCASecret: postgresql-ca
+    expirations:
+      postgresql-ca: 2026-12-15 12:02:27 +0000 UTC
+      postgresql-replication: 2026-12-15 12:02:27 +0000 UTC
+      postgresql-server: 2026-12-15 12:02:27 +0000 UTC
+    replicationTLSSecret: postgresql-replication
+    serverAltDNSNames:
+    - postgresql-rw
+    - postgresql-rw.database
+    - postgresql-rw.database.svc
+    - postgresql-rw.database.svc.cluster.local
+    - postgresql-r
+    - postgresql-r.database
+    - postgresql-r.database.svc
+    - postgresql-r.database.svc.cluster.local
+    - postgresql-ro
+    - postgresql-ro.database
+    - postgresql-ro.database.svc
+    - postgresql-ro.database.svc.cluster.local
+    serverCASecret: postgresql-ca
+    serverTLSSecret: postgresql-server
+  cloudNativePGCommitHash: 94ee31178
+  cloudNativePGOperatorHash: 495c8f8b99d3a01b461bcffa8f9ef3cba7eb381e2b19f7af48b81c42270f0759
+  conditions:
+  - lastTransitionTime: "2026-09-30T10:29:31Z"
+    message: A single, unique system ID was found across reporting instances.
+    reason: Unique
+    status: "True"
+    type: ConsistentSystemID
+  - lastTransitionTime: "2026-10-01T00:48:09Z"
+    message: Cluster is Ready
+    reason: ClusterIsReady
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2026-09-18T03:35:33Z"
+    message: Continuous archiving is working
+    reason: ContinuousArchivingSuccess
+    status: "True"
+    type: ContinuousArchiving
+  configMapResourceVersion:
+    metrics:
+      cnpg-default-monitoring: "397579"
+  currentPrimary: postgresql-1
+  currentPrimaryTimestamp: "2026-09-18T03:35:32.154035Z"
+  healthyPVC:
+  - postgresql-1
+  - postgresql-3
+  image: ghcr.io/cloudnative-pg/postgresql:17
+  instanceNames:
+  - postgresql-1
+  - postgresql-3
+  instances: 2
+  instancesReportedState:
+    postgresql-1:
+      ip: 192.168.188.32
+      isPrimary: true
+      timeLineID: 3
+    postgresql-3:
+      ip: 192.168.52.34
+      isPrimary: false
+      timeLineID: 3
+  instancesStatus:
+    healthy:
+    - postgresql-1
+    - postgresql-3
+  latestGeneratedNode: 3
+  managedRolesStatus: {}
+  pgDataImageInfo:
+    image: ghcr.io/cloudnative-pg/postgresql:17
+    majorVersion: 17
+  phase: Cluster in healthy state
+  poolerIntegrations:
+    pgBouncerIntegration: {}
+  pvcCount: 2
+  readService: postgresql-r
+  readyInstances: 2
+  secretsResourceVersion:
+    applicationSecretVersion: "397216"
+    clientCaSecretVersion: "397554"
+    replicationSecretVersion: "397556"
+    serverCaSecretVersion: "397554"
+    serverSecretVersion: "397555"
+  selector: cnpg.io/cluster=postgresql,cnpg.io/podRole=instance
+  switchReplicaClusterStatus: {}
+  systemID: "7686103626985140244"
+  targetPrimary: postgresql-1
+  targetPrimaryTimestamp: "2026-09-18T03:35:30.703407Z"
+  timelineID: 3
+  topology:
+    instances:
+      postgresql-1: {}
+      postgresql-3: {}
+    nodesUsed: 2
+    successfullyExtracted: true
+  writeService: postgresql-rw

@@ -1,0 +1,17 @@
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: pantry-cnpg-backup
+  namespace: database
+spec:
+  configuration:
+    destinationPath: s3://pantry-mate-cnpg-backup-542119828072/postgresql
+    s3Credentials:
+      accessKeyId:
+        name: cnpg-s3-credentials
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: cnpg-s3-credentials
+        key: ACCESS_SECRET_KEY
+    wal:
+      compression: gzip

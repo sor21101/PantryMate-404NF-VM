@@ -1,0 +1,33 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: pantry-recipe-postgresql
+  namespace: database
+
+spec:
+  instances: 1
+
+  imageName: ghcr.io/cloudnative-pg/postgresql:17
+
+  bootstrap:
+    initdb:
+      database: pantrymate_pantryrecipe
+      owner: pantry_recipe_app
+      secret:
+        name: pantry-recipe-postgresql-app
+
+  storage:
+    storageClass: local-path
+    size: 20Gi
+
+  affinity:
+    nodeSelector:
+      db-ha: enabled
+
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: "1"
+      memory: 2Gi
